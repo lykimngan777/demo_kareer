@@ -768,56 +768,51 @@ a {
 @media (max-width: 768px) {
     body {
         overflow-y: auto;
+        font-size: 0.85rem;
     }
 
     .main-logo {
-        height: 50px;
+        height: 35px;
     }
 
     .tab-container {
-        width: 90%;
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding: 0.4rem;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-        top: 1rem;
+        width: 95%;
+        padding: 0.3rem;
+        top: 0.8rem;
     }
 
     .tab-item {
-        padding: 0.5rem 1rem;
-        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.65rem;
     }
 
     .central-hub {
-        width: 140px;
-        height: 140px;
+        width: 120px;
+        height: 120px;
     }
 
     .hub-content p {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
     }
 
-    /* Shrink Orbit Rings */
-    .tier-1 { width: 220px; height: 220px; }
-    .tier-2 { width: 340px; height: 340px; }
-    .tier-3 { width: 460px; height: 460px; }
-    .tier-4 { width: 580px; height: 580px; }
-    .tier-5 { width: 700px; height: 700px; }
+    /* Shrink Orbit Rings More */
+    .tier-1 { width: 180px; height: 180px; }
+    .tier-2 { width: 280px; height: 280px; }
+    .tier-3 { width: 380px; height: 380px; }
+    .tier-4 { width: 480px; height: 480px; }
+    .tier-5 { width: 580px; height: 580px; }
 
     .node-label {
-        font-size: 0.7rem;
-        max-width: 80px;
-        white-space: normal;
-        line-height: 1.1;
+        font-size: 0.6rem;
+        max-width: 60px;
     }
 
     .modal-content-fullscreen {
-        padding: 4rem 1.5rem 2rem;
+        padding: 3rem 1.2rem 1.5rem;
     }
 
-    .close-modal-btn {
-        top: 1rem;
-        right: 1.5rem;
+    .analysis-paragraph {
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
 }
