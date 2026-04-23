@@ -731,72 +731,162 @@ body {
 
 @media (max-width: 768px) {
     body {
-        padding: 10px;
-        font-size: 0.9rem; /* Smaller base font */
+        padding: 5px;
+        font-size: 0.8rem; /* Extremely compact base font */
     }
 
     .main-header {
-        padding: 1rem;
+        padding: 0.5rem;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .logo-area img {
-        height: 40px; /* Even smaller logo */
+        height: 25px; /* Shrunken logo for mobile */
+    }
+
+    .quote-section {
+        padding: 60px 10px 40px 10px;
     }
 
     .quote-text {
-        font-size: 1.6rem; /* Significantly smaller quote */
-        line-height: 1.25;
-        padding: 0 1rem;
+        font-size: 1.1rem; /* Shrunken quote */
+        line-height: 1.2;
+        padding: 0 0.5rem;
     }
 
-    .steps-title, .features-title {
-        font-size: 2rem; /* Compact section titles */
-        margin-bottom: 2rem;
+    .quote-icon-top, .quote-icon-bottom {
+        font-size: 3rem;
+    }
+
+    .author {
+        font-size: 0.7rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .button-wrapper {
+        gap: 10px;
+    }
+
+    .features-section {
+        padding: 40px 1rem;
+    }
+
+    .features-title, .steps-title {
+        font-size: 1.5rem; /* Shrunken titles */
+        margin-bottom: 1.5rem;
+    }
+
+    .feature-item {
+        padding: 0.5rem 0;
+        gap: 0.5rem;
+    }
+
+    .feature-content {
+        font-size: 0.85rem;
+    }
+
+    .steps-section {
+        padding: 40px 1rem 10px 1rem;
     }
 
     .step-card {
-        padding: 1.5rem;
+        padding: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .step-number {
+        font-size: 2rem;
+        top: 0.5rem;
+        right: 1rem;
     }
 
     .step-heading {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
     }
 
     .step-desc {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
+        line-height: 1.5;
     }
 
+    .footer-cta {
+        padding: 20px 0 60px 0;
+    }
+
+    .btn-link {
+        font-size: 1.5rem;
+        gap: 10px;
+    }
+
+    /* Overlays */
     .assessment-card, .results-card {
-        padding: 1.2rem;
-        margin: 5px;
-        border-radius: 8px;
+        padding: 1rem;
+        margin: 0;
+        border-radius: 0;
+        width: 100%;
+        max-width: 100%;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .btn-close {
+        top: 0.5rem;
+        right: 0.8rem;
+        font-size: 1.8rem;
     }
 
     .question-text {
-        font-size: 1.2rem; /* Compact questions */
-        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .model-tag {
+        font-size: 0.65rem;
+        padding: 2px 8px;
     }
 
     .options-group {
-        grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 6px;
+    }
+
+    .option-item {
+        padding: 0.4rem 0.8rem !important;
+        min-width: 100px !important;
+    }
+
+    .option-label {
+        font-size: 0.75rem !important;
     }
 
     .btn-premium {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        gap: 8px;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 0.4rem 1.2rem !important;
+        font-size: 0.7rem !important;
+        min-width: 80px !important;
     }
 
     .results-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 15px;
+    }
+
+    .result-section h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
     }
 
     .chart-container {
-        height: 200px; /* More compact charts */
-    }
-
-    .chart-bar-label {
-        font-size: 0.5rem;
+        height: 160px;
     }
 }

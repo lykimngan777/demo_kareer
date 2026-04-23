@@ -768,51 +768,91 @@ a {
 @media (max-width: 768px) {
     body {
         overflow-y: auto;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+    }
+
+    .main-header {
+        top: 0.5rem !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
     }
 
     .main-logo {
-        height: 35px;
+        height: 25px !important;
     }
 
     .tab-container {
+        top: 2.8rem;
         width: 95%;
-        padding: 0.3rem;
-        top: 0.8rem;
+        padding: 0.2rem;
+        gap: 5px;
+        left: 50%;
+        transform: translateX(-50%);
     }
 
     .tab-item {
-        padding: 0.4rem 0.8rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.55rem;
+    }
+
+    .central-hub, .orbits-container {
+        display: none !important;
+    }
+
+    .matrix-canvas {
+        display: block !important;
+        height: auto !important;
+        overflow-y: auto;
+        padding-top: 6rem;
+        background: #f8f9fa;
+    }
+
+    .mobile-career-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .mobile-career-card {
+        background: white;
+        padding: 15px;
+        border-radius: 12px;
+        border: 2px solid #000;
+        box-shadow: 4px 4px 0px #000;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .mobile-career-name {
+        font-weight: 900;
+        font-size: 1rem;
+        color: #000;
+        line-height: 1.2;
+    }
+
+    .mobile-career-fit {
         font-size: 0.65rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border-radius: 4px;
+        align-self: flex-start;
+        border: 1px solid #000;
     }
-
-    .central-hub {
-        width: 120px;
-        height: 120px;
-    }
-
-    .hub-content p {
-        font-size: 0.7rem;
-    }
-
-    /* Shrink Orbit Rings More */
-    .tier-1 { width: 180px; height: 180px; }
-    .tier-2 { width: 280px; height: 280px; }
-    .tier-3 { width: 380px; height: 380px; }
-    .tier-4 { width: 480px; height: 480px; }
-    .tier-5 { width: 580px; height: 580px; }
 
     .node-label {
-        font-size: 0.6rem;
-        max-width: 60px;
+        font-size: 0.5rem;
+        max-width: 50px;
     }
 
     .modal-content-fullscreen {
-        padding: 3rem 1.2rem 1.5rem;
+        padding: 2.5rem 1rem 1rem;
     }
 
     .analysis-paragraph {
-        font-size: 0.9rem;
-        line-height: 1.5;
+        font-size: 0.8rem;
+        line-height: 1.4;
     }
 }

@@ -97,8 +97,45 @@ document.addEventListener('DOMContentLoaded', () => {
             { level: "Very Low", label: "Rất thấp", r: 52, color: "#FFE8CC" } 
         ];
 
-        if (isMobile) { 
-            fitLevels.forEach(f => { f.r *= 0.7; }); 
+        if (isMobile) {
+            fitLevels.forEach(f => { f.r *= 0.7; });
+            
+            // Render a vertical list for mobile
+            const listContainer = document.createElement('div');
+            listContainer.className = 'mobile-career-list';
+            
+            processedCareers.forEach((c) => {
+                const fitData = fitLevels.find(f => f.level === c.fit);
+                const card = document.createElement('div');
+                card.className = 'mobile-career-card';
+                card.innerHTML = `
+                    <div class="mobile-career-name">${c.name}</div>
+                    <div class="mobile-career-fit" style="background: ${fitData.color}">${fitData.label}</div>
+                `;
+                card.onclick = () => {
+                    selectCareer(c.name, null, c.fit);
+                    // Show detail modal (reuse existing modal logic)
+                    const modal = document.getElementById('strengths-modal');
+                    const paragraph = document.getElementById('analysis-paragraph');
+                    if (modal && paragraph) {
+                        paragraph.innerHTML = `
+                            <h2 style="font-weight:900; margin-bottom:15px; border-bottom:2px solid #000; padding-bottom:10px;">${c.name}</h2>
+                            <p style="margin-bottom:15px;"><strong>Mức độ phù hợp:</strong> ${fitData.label}</p>
+                            <p style="margin-bottom:15px;"><strong>Lý do:</strong> ${reasons[c.fit]}</p>
+                            <p style="margin-bottom:15px;"><strong>Thu nhập:</strong> ${c.salary}</p>
+                            <p style="margin-bottom:15px;"><strong>Thị trường:</strong> ${c.market}</p>
+                            <div style="margin-top:20px; display:flex; gap:10px;">
+                                <a href="timeline.html?career=${encodeURIComponent(c.name)}" class="btn" style="flex:1; text-align:center; background:#000; color:#fff; text-decoration:none; padding:10px; border-radius:8px; font-weight:700;">Xem chi tiết</a>
+                            </div>
+                        `;
+                        modal.classList.add('active');
+                    }
+                };
+                listContainer.appendChild(card);
+            });
+            
+            careerNodesContainer.appendChild(listContainer);
+            return; // Exit early, no matrix on mobile
         }
 
         const tabDetail = document.getElementById('tab-detail');

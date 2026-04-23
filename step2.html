@@ -69,12 +69,16 @@
 
     @media (max-width: 768px) {
       .main-header {
-        top: 1rem;
-        left: 1rem;
+        top: 0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        display: flex;
+        justify-content: center;
       }
 
       .main-logo {
-        height: 60px;
+        height: 25px;
       }
     }
 
@@ -138,20 +142,6 @@
         color: #fff;
     }
 
-    @media (max-width: 768px) {
-        .tab-container {
-            top: 1rem;
-            width: 95%;
-            overflow-x: auto;
-            justify-content: flex-start;
-            padding: 0.4rem;
-            border-radius: 20px;
-        }
-        .tab-item {
-            padding: 0.6rem 1.2rem;
-            font-size: 0.75rem;
-        }
-    }
 
 
 
@@ -236,8 +226,14 @@
 
     .opt-label input {
       position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       opacity: 0;
       cursor: pointer;
+      z-index: 100;
+      background: rgba(255,255,255,0.01); /* Invisible but tangible touch target */
     }
 
     .opt-circle {
@@ -257,9 +253,9 @@
       transform: scale(1.1);
     }
 
-    .opt-label input:checked+.opt-circle {
-      background: var(--accent);
-      border-color: var(--accent);
+    .opt-label input:checked ~ .opt-circle {
+      background: var(--accent) !important;
+      border-color: var(--accent) !important;
       box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
     }
 
@@ -385,13 +381,15 @@
       border: 2px solid #eee;
       border-radius: 10px;
       margin-bottom: 15px;
+      position: relative; /* For absolute badge */
     }
 
     .dim-item-top {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start; /* Label on left */
       align-items: center;
       margin-bottom: 12px;
+      padding-right: 80px; /* Avoid overlap with absolute badge */
     }
 
     .dim-label {
@@ -402,10 +400,14 @@
 
     .dim-badge {
       font-weight: 800;
-      padding: 5px 15px;
-      border-radius: 8px;
       font-size: 0.75rem;
       text-transform: uppercase;
+      position: absolute;
+      top: 8px;
+      right: 15px;
+      background: transparent !important;
+      color: #000 !important;
+      padding: 0 !important;
     }
 
     .dim-bar-track {
@@ -422,19 +424,9 @@
       transition: width 1s ease-out;
     }
 
-    .val-vhigh {
-      background: #111;
-      color: white;
-    }
-
-    .val-med {
-      background: #666;
-      color: white;
-    }
-
-    .val-low {
-      background: #999;
-      color: white;
+    .val-vhigh, .val-med, .val-low {
+      background: transparent;
+      color: #000;
     }
 
     /* Recommendation Box */
@@ -542,6 +534,7 @@
       opacity: 0;
       transition: all 0.3s ease;
       z-index: 10000;
+      white-space: nowrap;
     }
 
     .toast.show {
@@ -551,49 +544,102 @@
 
     @media (max-width: 768px) {
       body {
-        padding: 10px;
+        padding: 5px;
       }
 
       .main-logo {
-        height: 50px;
+        height: 25px; /* Extra shrunken */
       }
 
       .tab-container {
-        width: 90%;
-        overflow-x: auto;
-        justify-content: flex-start;
-        padding: 0.4rem;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
+        width: 95%;
+        top: 3.2rem; /* Avoid centered logo */
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.2rem;
+        gap: 5px;
       }
 
       .tab-item {
-        padding: 0.5rem 1rem;
-        font-size: 0.75rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.55rem; /* Extra shrunken tabs */
       }
 
       .card {
-        padding: 1.5rem 1rem;
-        margin-top: 100px; /* Space for logo and tabs */
+        padding: 0.5rem;
+        margin-top: 60px;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
       }
 
       .q-item {
+        display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
+        padding: 15px 0;
+        gap: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+        background: transparent !important;
+        box-shadow: none !important;
+        transform: none !important;
+      }
+
+      .q-item.answered {
+        background: rgba(0, 0, 0, 0.02) !important; /* Subtle feedback */
+        border-radius: 8px;
+      }
+
+      .q-text {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #000;
+        padding-right: 0;
+        line-height: 1.4;
       }
 
       .options-row {
         width: 100%;
+        display: flex;
+        flex-direction: row;
         justify-content: space-between;
+        align-items: flex-end;
+        gap: 5px;
+        padding: 5px 0 10px 0;
       }
 
-      .scale-header {
-        display: none;
+      .opt-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        width: auto;
+        flex: 1;
+        min-height: 50px; /* Larger hit area */
+        justify-content: flex-end;
+        padding: 5px 0;
+        position: relative; /* CRITICAL for absolute children */
+      }
+
+      .mobile-label {
+        display: block !important;
+        font-size: 0.55rem;
+        font-weight: 600;
+        color: #666;
+        text-align: center;
+        max-width: 45px;
+        line-height: 1.1;
+        pointer-events: none; /* Don't block clicks */
+      }
+
+      .opt-circle {
+        width: 24px;
+        height: 24px;
+        pointer-events: none; /* Don't block clicks */
       }
 
       .result-title {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
       }
 
       .rec-grid {
@@ -602,23 +648,25 @@
       }
 
       .rec-item {
-        padding: 20px;
+        padding: 15px;
       }
 
-      .insight-grid {
-        grid-template-columns: 1fr;
+      .insight-card {
+        padding: 15px;
       }
 
       .btn {
-        width: 100%;
-        justify-content: center;
-        padding: 1rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7rem;
       }
 
       .footer {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
+        margin-top: 20px;
+        gap: 10px;
+      }
+
+      .scale-header {
+        display: none !important;
       }
     }
   </style>
@@ -810,7 +858,7 @@
       const names = { 1: "Không đúng", 2: "Ít đúng", 3: "Bình thường", 4: "Khá đúng", 5: "Rất đúng" };
       let html = `<div class="scale-header">${['KHÔNG ĐÚNG', 'ÍT ĐÚNG', 'BÌNH THƯỜNG', 'KHÁ ĐÚNG', 'RẤT ĐÚNG'].map(l => `<div class="scale-label">${l.split(' ').map(s => `<span>${s}</span>`).join('')}</div>`).join('')}</div><div class="questions-list">`;
       questions.forEach((q, i) => {
-        html += `<div class="q-item" id="q-${i}"><div class="q-text">${q.text}</div><div class="options-row">${[1, 2, 3, 4, 5].map(s => `<label class="opt-label" title="${names[s]}"><input type="radio" name="q-${i}" value="${s}" ${answers[i] === s ? 'checked' : ''} onchange="saveAns(${i}, ${s})"><div class="opt-circle"></div></label>`).join('')}</div></div>`;
+        html += `<div class="q-item" id="q-${i}"><div class="q-text">${q.text}</div><div class="options-row">${[1, 2, 3, 4, 5].map(s => `<label class="opt-label" title="${names[s]}"><input type="radio" name="q-${i}" value="${s}" ${answers[i] === s ? 'checked' : ''} onchange="saveAns(${i}, ${s})"><div class="mobile-label" style="display:none;">${names[s]}</div><div class="opt-circle"></div></label>`).join('')}</div></div>`;
       });
       area.innerHTML = html + `</div>`;
     }
