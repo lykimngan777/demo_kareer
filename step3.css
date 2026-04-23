@@ -763,3 +763,61 @@ a {
         font-size: 2rem;
     }
 }
+
+/* ─── MOBILE OPTIMIZATION ─── */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .main-logo {
+        height: 50px;
+    }
+
+    .tab-container {
+        width: 90%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 0.4rem;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        top: 1rem;
+    }
+
+    .tab-item {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    .central-hub {
+        width: 140px;
+        height: 140px;
+    }
+
+    .hub-content p {
+        font-size: 0.8rem;
+    }
+
+    /* Shrink Orbit Rings */
+    .tier-1 { width: 220px; height: 220px; }
+    .tier-2 { width: 340px; height: 340px; }
+    .tier-3 { width: 460px; height: 460px; }
+    .tier-4 { width: 580px; height: 580px; }
+    .tier-5 { width: 700px; height: 700px; }
+
+    .node-label {
+        font-size: 0.7rem;
+        max-width: 80px;
+        white-space: normal;
+        line-height: 1.1;
+    }
+
+    .modal-content-fullscreen {
+        padding: 4rem 1.5rem 2rem;
+    }
+
+    .close-modal-btn {
+        top: 1rem;
+        right: 1.5rem;
+    }
+}

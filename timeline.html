@@ -270,6 +270,51 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 768px) {
+            .tab-container {
+                top: 1rem;
+                width: 95%;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 0.4rem;
+                border-radius: 20px;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-item {
+                padding: 0.6rem 1rem;
+                font-size: 0.75rem;
+            }
+
+            .timeline-view {
+                padding-top: 100px;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .timeline-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .filter-box {
+                padding: 1rem;
+            }
+
+            .detail-card {
+                padding: 1.5rem;
+            }
+
+            .main-header {
+                left: 1rem !important;
+                top: 1rem !important;
+            }
+
+            .main-header img {
+                height: 30px !important;
+            }
+        }
     </style>
 </head>
 
@@ -290,7 +335,7 @@
     <div class="timeline-view">
         <header class="timeline-header">
             <h1 id="timeline-title">Chi tiết Nghề nghiệp</h1>
-            <p id="timeline-subtitle">Phân tích chuyên sâu về vị trí cao nhất bạn có thể đạt được.</p>
+
         </header>
 
         <div class="filter-box">
@@ -411,7 +456,7 @@
             const data = generateCustomTimeline(role);
             const riasec = JSON.parse(localStorage.getItem('kareer_riasec') || '{"topTraits":["enterprising","social"]}');
             
-            document.getElementById('timeline-subtitle').innerHTML = `Phân tích chuyên sâu về vị trí cao nhất bạn có thể đạt được: <strong>${role}</strong>`;
+
             
             const traitLabels = {
                 realistic: 'Thực tế (R)', investigative: 'Nghiên cứu (I)', artistic: 'Nghệ thuật (A)',
