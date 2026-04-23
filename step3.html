@@ -27,9 +27,9 @@
     <main>
         <section id="explorer" class="explorer-view">
             <div class="explorer-nav">
-                <div class="nav-tab active" onclick="location.href='step3.html'">Mở lối sự nghiệp</div>
-                <div class="nav-tab" id="tab-detail">Chi tiết nghề nghiệp</div>
-                <div class="nav-tab" id="tab-roadmap">Lộ trình phát triển</div>
+                <a href="step3.html" class="nav-tab active">Mở lối sự nghiệp</a>
+                <a href="timeline.html" id="tab-detail" class="nav-tab">Chi tiết nghề nghiệp</a>
+                <a href="roadmap.html" id="tab-roadmap" class="nav-tab">Lộ trình phát triển</a>
             </div>
 
             <div class="matrix-canvas" id="matrix-canvas">
@@ -47,7 +47,7 @@
                 <!-- Central Hub -->
                 <div class="central-hub">
                     <div class="hub-content">
-                        <p>Phân tích <br> chi tiết bản thân</p>
+                        <p>Mô tả chi tiết</p>
                         <div class="hub-arrow">↓</div>
                     </div>
                     <div class="hub-glow"></div>
@@ -77,13 +77,8 @@
 
     <script src="config.js"></script>
     <script src="api-client.js"></script>
-    <!-- Updated: step3.js (was /Step_3_Matrix/main.js) -->
+    <script src="database.js"></script>
     <script src="step3.js"></script>
-</body>
-
-</html>
-<script src="database.js"></script>
-<script src="step3.js"></script>
 </body>
 
 </html>

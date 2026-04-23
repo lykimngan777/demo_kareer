@@ -1,304 +1,527 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kế hoạch học tập | Matrix</title>
+    <title>Lộ trình phát triển | Kareer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
-        rel="stylesheet">
-    <!-- Updated: step3.css (was style.css in subfolder) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="step3.css">
     <style>
         body {
             overflow-y: auto !important;
             overflow-x: hidden !important;
+            background: #fdfdfd;
         }
 
         .roadmap-view {
             min-height: 100vh;
-            background: #f8f9fa;
-            padding: 4rem 2rem;
+            padding: 8rem 2rem 6rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .roadmap-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             animation: fadeIn 1s ease;
         }
 
         .roadmap-header h1 {
             font-family: var(--font-heading);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: #111;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #000;
+            letter-spacing: -1px;
         }
 
         .roadmap-header p {
             font-family: var(--font-main);
-            color: #666;
+            color: #555;
             font-size: 1.1rem;
-            max-width: 600px;
+            max-width: 700px;
+            line-height: 1.7;
         }
 
         .back-btn {
-            position: absolute;
+            position: fixed;
             top: 2rem;
             left: 2rem;
             padding: 0.8rem 1.5rem;
-            background: #fff;
-            color: #111;
+            background: #000;
+            color: #fff;
             border-radius: 50px;
             font-family: var(--font-heading);
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.85rem;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateX(-5px);
+            background: #333;
         }
 
+        /* ─── FILTER BOX ─── */
         .filter-box {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
-            display: flex;
-            align-items: flex-end;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-            justify-content: center;
             width: 100%;
-            max-width: 800px;
-            border: 1px solid #f0f0f0;
-        }
-
-        .select-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            min-width: 250px;
+            max-width: 600px;
+            margin-bottom: 5rem;
+            text-align: center;
         }
 
         .select-group label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #555;
+            display: block;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
         }
 
         .select-group select {
-            padding: 0.8rem 1rem;
-            border-radius: 10px;
-            border: 1px solid #e0e0e0;
-            font-size: 1rem;
-            color: #333;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .select-group select:focus {
-            border-color: #000;
-        }
-
-        .course-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
             width: 100%;
-            max-width: 1100px;
-        }
-
-        .course-card {
+            padding: 1.2rem;
+            border-radius: 12px;
+            border: 3px solid #000;
+            font-size: 1.1rem;
+            font-weight: 700;
             background: #fff;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            border: 1px solid #f0f0f0;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 6px 6px 0px #000;
+            cursor: pointer;
+            appearance: none;
+            outline: none;
+        }
+
+        /* ─── TIMELINE VERTICAL ─── */
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem 1.5rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 40px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #000;
+            z-index: 1;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 100%;
+            margin-bottom: 5rem;
             display: flex;
-            flex-direction: column;
+            justify-content: flex-start;
+            padding-left: 80px;
+            animation: fadeIn 0.8s ease backwards;
         }
 
-        .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-left: 80px;
         }
 
-        .course-tag {
+        .timeline-dot {
+            position: absolute;
+            left: 40px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border: 4px solid #000;
+            border-radius: 50%;
+            transform: translate(-50%, 0);
+            z-index: 5;
+            box-shadow: 0 0 0 6px #fff;
+        }
+
+        .timeline-item.start .timeline-dot {
+            background: #000;
+            height: 30px;
+            width: 30px;
+        }
+
+        .timeline-item.target .timeline-dot {
+            background: #ffde59;
+            height: 34px;
+            width: 34px;
+        }
+
+        .timeline-content {
+            width: 100%;
+            max-width: 900px;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 10px 10px 0px #000;
+            transition: transform 0.3s ease;
+            margin-right: 2rem;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content,
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.02);
+        }
+
+        .timeline-step-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .timeline-role {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .base-badge {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 12px;
+            border-radius: 4px;
             font-size: 0.7rem;
             font-weight: 800;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            background: #f0f0f0;
-            border-radius: 50px;
-            width: fit-content;
-            margin-bottom: 1.2rem;
-            letter-spacing: 0.05em;
+            margin-left: 10px;
+            border: 1px solid #2e7d32;
         }
 
-        .course-card h3 {
-            font-size: 1.25rem;
+        .skill-list {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-chip {
+            background: #f0f0f0;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid #ddd;
+        }
+
+        .skill-future {
+            background: #fff3e0;
+            border: 1px solid #ff9800;
+            color: #e65100;
+        }
+
+        .course-suggestion {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #eee;
+        }
+
+        .course-suggestion h4 {
+            font-size: 0.85rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            line-height: 1.4;
-            color: #111;
-        }
-
-        .course-desc {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .course-meta {
-            margin-top: auto;
-            padding-top: 1.5rem;
-            border-top: 1px solid #f5f5f5;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .course-provider {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #111;
-        }
-
-        .course-link {
-            font-size: 0.8rem;
-            font-weight: 800;
             text-transform: uppercase;
-            color: #000;
-            text-decoration: none;
+        }
+
+        .course-link-card {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
+            gap: 1rem;
+            padding: 1rem;
+            background: #fafafa;
+            border: 2px solid #000;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #000;
+            transition: all 0.2s ease;
+            margin-bottom: 0.8rem;
         }
 
-        .course-link:hover {
-            text-decoration: underline;
+        .course-link-card:hover {
+            background: #000;
+            color: #fff;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .provider-logo {
+            font-weight: 900;
+            font-style: italic;
+            background: #000;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+        }
+        .course-link-card:hover .provider-logo {
+            background: #fff;
+            color: #000;
         }
 
         @media (max-width: 768px) {
-            .roadmap-view {
-                padding: 4rem 1rem;
-            }
+            .timeline-line { left: 30px; }
+            .timeline-dot { left: 30px; }
+            .timeline-item { justify-content: flex-start !important; padding-left: 60px !important; padding-right: 0 !important; }
+            .timeline-content { width: 100% !important; margin: 0 !important; }
+            .roadmap-header h1 { font-size: 2rem; }
+        }
 
-            .back-btn {
-                top: 1rem;
-                left: 1rem;
-            }
-
-            .filter-box {
-                flex-direction: column;
-                align-items: stretch;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-
 <body>
+    <div class="tab-container">
+        <a href="step3.html" class="tab-item">Mở lối sự nghiệp</a>
+        <a href="timeline.html" class="tab-item">Chi tiết nghề nghiệp</a>
+        <a href="roadmap.html" class="tab-item active">Lộ trình phát triển</a>
+    </div>
+
     <div class="roadmap-view">
-        <!-- Updated: step3.html (was index.html in subfolder) -->
         <a href="step3.html" class="back-btn"><span>← Quay lại</span></a>
 
-        <div class="roadmap-header">
-            <h1>Lộ trình đào tạo đề xuất</h1>
-            <p>Dựa trên bản sắc nghề nghiệp và các kỹ năng bạn đang sở hữu, đây là lộ trình học tập tối ưu để bạn tiến
-                xa hơn.</p>
-        </div>
+
 
         <div class="filter-box">
             <div class="select-group">
-                <label>Vị trí công việc</label>
+                <label>Vị trí công việc mục tiêu</label>
                 <select id="role-filter">
-                    <option value="ui-designer">UI Designer</option>
-                    <option value="frontend-dev">Frontend Developer</option>
-                    <option value="product-manager">Product Manager</option>
-                    <option value="data-analyst">Data Analyst</option>
-                </select>
-            </div>
-            <div class="select-group">
-                <label>Giai đoạn mục tiêu</label>
-                <select id="level-filter">
-                    <option value="intern">Intern / Junior</option>
-                    <option value="middle">Middle Level</option>
-                    <option value="senior">Senior / Lead</option>
+                    <!-- Options populated by JS -->
                 </select>
             </div>
         </div>
 
-        <div class="course-grid" id="course-grid"></div>
+        <div class="timeline-container" id="timeline-flow">
+            <div class="timeline-line"></div>
+            <!-- Timeline items injected here -->
+        </div>
     </div>
 
     <script>
-        const roadmapData = {
-            'ui-designer': {
-                'intern': [
-                    { title: "Design Fundamentals: UI/UX Essentials", provider: "Interaction Design Foundation", desc: "Nắm vững nguyên lý cơ bản về màu sắc, layout và typography trong thiết kế giao diện.", tag: "Nền tảng" },
-                    { title: "Mastering Figma for Beginners", provider: "Udemy", desc: "Sử dụng thành thạo công cụ thiết kế Figma từ các tính năng cơ bản đến nâng cao.", tag: "Công cụ" }
-                ],
-                'middle': [
-                    { title: "Advanced Design Systems", provider: "DesignBetter.co", desc: "Học cách xây dựng và quản lý hệ thống thiết kế (Design System) quy mô lớn.", tag: "Nâng cao" },
-                    { title: "Prototyping with Propi", provider: "Coursera", desc: "Tạo các prototype có độ tương tác cao và mô phỏng trải nghiệm thực tế.", tag: "Chuyên môn" }
-                ],
-                'senior': [
-                    { title: "Strategic Design Leadership", provider: "IDEO U", desc: "Phát triển tư duy chiến lược và kỹ năng dẫn dắt đội ngũ thiết kế sáng tạo.", tag: "Lãnh đạo" }
-                ]
-            }
+        const careerList = [
+            "Kỹ sư phần mềm", "Chuyên viên Phân tích dữ liệu", "Nhà thiết kế UX/UI", 
+            "Quản lý Dự án IT", "Chuyên viên Marketing số", "Kế toán trưởng", 
+            "Chuyên viên Nhân sự", "Kiến trúc sư", "Bác sĩ Đa khoa", 
+            "Chuyên viên Tư vấn Tài chính", "Nhà tâm lý học", "Kỹ sư Cơ khí", 
+            "Kiểm toán viên", "Chuyên viên PR & Truyền thông", "Lập trình viên AI/ML", 
+            "Quản lý Chuỗi cung ứng", "Nhà thiết kế thời trang", "Giáo viên Tiếng Anh", 
+            "Chuyên viên Luật", "Doanh nhân / Founder", "Quản lý Khách sạn", 
+            "Nhà khoa học dữ liệu"
+        ];
+
+        // Future Skills from WEF 2025
+        const wefSkills = [
+            { name: "Tư duy AI & Machine Learning", type: "future" },
+            { name: "Phân tích dữ liệu & Trực quan hóa", type: "future" },
+            { name: "Kỹ năng số (Digital Literacy)", type: "future" },
+            { name: "Tư duy phản biện & Phân tích", type: "future" },
+            { name: "Sáng tạo & Sáng kiến", type: "future" }
+        ];
+
+        const roleCategories = {
+            tech: ["Kỹ sư phần mềm", "Lập trình viên AI/ML", "Nhà khoa học dữ liệu", "Kỹ sư Cơ khí", "Quản lý Dự án IT", "Chuyên viên Phân tích dữ liệu"],
+            creative: ["Nhà thiết kế UX/UI", "Nhà thiết kế thời trang", "Kiến trúc sư", "Chuyên viên PR & Truyền thông"],
+            business: ["Chuyên viên Marketing số", "Kế toán trưởng", "Kiểm toán viên", "Quản lý Chuỗi cung ứng", "Chuyên viên Tư vấn Tài chính", "Quản lý Khách sạn", "Doanh nhân / Founder"],
+            social: ["Chuyên viên Nhân sự", "Bác sĩ Đa khoa", "Nhà tâm lý học", "Giáo viên Tiếng Anh", "Chuyên viên Luật"]
         };
 
-        function renderCourses() {
-            const grid = document.getElementById('course-grid');
-            const role = document.getElementById('role-filter').value;
-            const level = document.getElementById('level-filter').value;
-            const courses = roadmapData[role]?.[level] || [];
-            grid.innerHTML = courses.map(c => `
-                <div class="course-card">
-                    <div class="course-tag">${c.tag}</div>
-                    <h3>${c.title}</h3>
-                    <p class="course-desc">${c.desc}</p>
-                    <div class="course-meta">
-                        <span class="course-provider">${c.provider}</span>
-                        <a href="#" class="course-link">Khám phá</a>
-                    </div>
-                </div>
-            `).join('');
+        const categorySkills = {
+            tech: ["Lập trình ứng dụng", "Hệ quản trị CSDL", "Kiến trúc hệ thống", "Cloud Computing", "Cybersecurity"],
+            creative: ["Tư duy thiết kế", "Sáng tạo nội dung", "Kỹ thuật đồ họa", "Nghiên cứu người dùng", "Truyền thông thị giác"],
+            business: ["Quản trị dự án", "Phân tích thị trường", "Kỹ năng đàm phán", "Quản trị rủi ro", "Tư duy chiến lược"],
+            social: ["Kỹ năng tham vấn", "Giao tiếp liên nhân", "Quản trị nhân sự", "Pháp luật & Đạo đức", "Thấu cảm & Hỗ trợ"]
+        };
+
+        const categoryCourses = {
+            tech: [
+                { n: "Learning How to Learn", p: "Coursera", url: "https://www.coursera.org/learn/learning-how-to-learn" },
+                { n: "Google IT Support Professional", p: "Google Certs", url: "https://www.coursera.org/professional-certificates/google-it-support" },
+                { n: "IBM AI Engineering", p: "Coursera", url: "https://www.coursera.org/specializations/ibm-ai-engineer" }
+            ],
+            creative: [
+                { n: "Graphic Design Foundation", p: "Coursera", url: "https://www.coursera.org/specializations/graphic-design" },
+                { n: "Google UX Design Professional", p: "Google Certs", url: "https://www.coursera.org/professional-certificates/google-ux-design" },
+                { n: "UI/UX Design Masterclass", p: "FPT Arena", url: "https://www.fptarena.edu.vn/chuyen-nganh-hoc/ui-ux-design/" }
+            ],
+            business: [
+                { n: "Wharton Business Foundations", p: "Coursera", url: "https://www.coursera.org/specializations/wharton-business-foundations" },
+                { n: "Google Project Management", p: "Google Certs", url: "https://www.coursera.org/professional-certificates/google-project-management" },
+                { n: "Digital Transformation Strategy", p: "Coursera", url: "https://www.coursera.org/learn/digital-transformation-strategy" }
+            ],
+            social: [
+                { n: "Social Psychology Specialization", p: "Coursera", url: "https://www.coursera.org/learn/social-psychology" },
+                { n: "People and Soft Skills for Leaders", p: "LinkedIn Learning", url: "https://www.linkedin.com/learning/topics/soft-skills" },
+                { n: "Human Resource Management", p: "Coursera", url: "https://www.coursera.org/specializations/human-resource-management" }
+            ]
+        };
+
+        function generateCustomPath(targetRole, profile) {
+            const basePos = profile.position || "Người mới bắt đầu";
+            const category = Object.keys(roleCategories).find(key => roleCategories[key].includes(targetRole)) || 'business';
+            const skills = categorySkills[category];
+            const courses = categoryCourses[category];
+
+            return [
+                { 
+                    stage: "BẮT ĐẦU (Tận dụng Base)", 
+                    role: `${basePos} / Thực tập sinh`, 
+                    skills: ["Chuyển đổi kỹ năng", "Thích nghi môi trường", "Làm chủ công cụ"], 
+                    courses: [
+                        courses[0], 
+                        { n: "Kỹ năng làm việc chuyên nghiệp", p: "Google Certs", url: "https://grow.google/certificates/" }
+                    ] 
+                },
+                { 
+                    stage: "CHUYỂN TIẾP", 
+                    role: `Chuyên viên ${targetRole} (Mới vào nghề)`, 
+                    skills: [skills[0], skills[1], "Critical Thinking"], 
+                    courses: [
+                        courses[1], 
+                        { n: "Đào tạo nghề nghiệp quốc gia", p: "Bộ LĐ-TB&XH", url: "https://gdn.gov.vn/" }
+                    ] 
+                },
+                { 
+                    stage: "PHÁT TRIỂN", 
+                    role: `${targetRole} (Chuyên sâu)`, 
+                    skills: [skills[2], skills[3], "Data-Driven Decisions"], 
+                    courses: [
+                        courses[2], 
+                        { n: "Tư duy lãnh đạo tương lai", p: "Topica Native", url: "https://topicanative.edu.vn/" }
+                    ] 
+                },
+                { 
+                    stage: "MỤC TIÊU", 
+                    role: `Chuyên gia / Quản lý ${targetRole}`, 
+                    skills: [skills[4], "Tầm nhìn chiến lược", "Strategic AI Mastery"], 
+                    courses: [
+                        { n: "Executive Leadership Program", p: "Coursera", url: "https://www.coursera.org/specializations/executive-leadership" }, 
+                        { n: "Professional Career Hub", p: "LinkedIn Learning", url: "https://www.linkedin.com/learning/" }
+                    ] 
+                }
+            ];
         }
 
-        document.getElementById('role-filter').addEventListener('change', renderCourses);
-        document.getElementById('level-filter').addEventListener('change', renderCourses);
-        renderCourses();
+        function initDropdown() {
+            const roleFilter = document.getElementById('role-filter');
+            roleFilter.innerHTML = careerList.map(c => `<option value="${c}">${c}</option>`).join('');
+            
+            const selectedCareer = localStorage.getItem('selectedCareer');
+            if (selectedCareer && careerList.includes(selectedCareer)) {
+                roleFilter.value = selectedCareer;
+            }
+        }
+
+        function renderTimeline() {
+            const flow = document.getElementById('timeline-flow');
+            const targetRole = document.getElementById('role-filter').value;
+            const profile = JSON.parse(localStorage.getItem('kareer_profile') || '{}');
+            
+            // Save selection
+            localStorage.setItem('selectedCareer', targetRole);
+
+            const path = generateCustomPath(targetRole, profile);
+            
+            let html = '<div class="timeline-line"></div>';
+            
+            const quizResult = JSON.parse(localStorage.getItem('kareer_result') || '{}');
+            const userScores = quizResult.scores || {};
+            const topTraits = Object.entries(userScores)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 2)
+                .map(([trait]) => trait);
+
+            const traitLabels = {
+                realistic: 'Thực tế (R)', investigative: 'Nghiên cứu (I)', artistic: 'Nghệ thuật (A)',
+                social: 'Xã hội (S)', enterprising: 'Quản lý (E)', conventional: 'Nghiệp vụ (C)'
+            };
+
+            path.forEach((step, index) => {
+                const isStart = index === 0;
+                const isTarget = index === path.length - 1;
+                const itemClass = isStart ? 'timeline-item start' : (isTarget ? 'timeline-item target' : 'timeline-item');
+                
+                // Personalize description
+                let personalizedDesc = "";
+                if (isStart) {
+                    personalizedDesc = `Với nền tảng là <strong>${profile.position || 'Nền tảng của bạn'}</strong> và thế mạnh <strong>${topTraits.map(t => traitLabels[t]).join(', ')}</strong>, bạn có lợi thế lớn trong việc chuyển đổi sang lĩnh vực này nhờ khả năng thích nghi và tư duy thực tiễn.`;
+                } else if (isTarget) {
+                    personalizedDesc = `Tại cột mốc này, bạn sẽ phát huy tối đa tiềm năng <strong>${traitLabels[topTraits[0]]}</strong> để trở thành một chuyên gia dẫn dắt trong ngành.`;
+                }
+
+                // Add WEF skills to development steps
+                const currentSkills = [...step.skills];
+                if (index === 1) currentSkills.push(wefSkills[0].name, wefSkills[2].name); // AI & Digital
+                if (index === 2) currentSkills.push(wefSkills[1].name); // Data
+
+                html += `
+                    <div class="timeline-item ${itemClass}" style="animation-delay: ${index * 0.2}s">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-step-label">${step.stage}</span>
+                            <div class="timeline-role">
+                                ${step.role}
+                                ${isStart ? `<span class="base-badge">Từ Base: ${profile.position || 'Nền tảng của bạn'}</span>` : ''}
+                            </div>
+                            
+                            ${personalizedDesc ? `<p style="font-size:0.9rem; color:#444; margin: 1rem 0; line-height:1.5; padding: 1rem; background: #f8f9fa; border-left: 4px solid #000; border-radius: 4px;">${personalizedDesc}</p>` : ''}
+
+                            <div class="skill-list">
+                                ${currentSkills.map(s => {
+                                    const isWef = wefSkills.some(w => w.name === s);
+                                    return `<span class="skill-chip ${isWef ? 'skill-future' : ''}">${s}${isWef ? ' ✨' : ''}</span>`;
+                                }).join('')}
+                            </div>
+                            
+                            <div class="course-suggestion">
+                                <h4>Khóa học & Chứng chỉ đề xuất</h4>
+                                ${step.courses.map(c => `
+                                    <a href="${c.url}" target="_blank" class="course-link-card">
+                                        <span class="provider-logo">${c.p}</span>
+                                        <div style="flex:1">
+                                            <div style="font-weight:700; font-size:0.9rem">${c.n}</div>
+                                            <div style="font-size:0.75rem; opacity:0.7">Chương trình đào tạo tương lai</div>
+                                        </div>
+                                        <span style="font-size:1.2rem">→</span>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            flow.innerHTML = html;
+        }
+
+        document.getElementById('role-filter').addEventListener('change', renderTimeline);
+        
+        initDropdown();
+        renderTimeline();
     </script>
 </body>
-
 </html>

@@ -162,6 +162,9 @@
     .opt-label {
       cursor: pointer;
       position: relative;
+      width: 24px;
+      display: flex;
+      justify-content: center;
     }
 
     .opt-label input {
@@ -198,11 +201,11 @@
       justify-content: flex-end;
       gap: 24px;
       margin-bottom: 20px;
-      padding-right: 1.5rem;
+      padding-right: calc(1.5rem + 24px); /* Match options-row (1.5rem) + q-item (24px) */
     }
 
     .scale-label {
-      width: 20px;
+      width: 24px;
       text-align: center;
       font-size: 0.52rem;
       font-weight: 800;
@@ -644,11 +647,25 @@
     };
 
     function renderPage() {
+      // Check for saved results first
+      const savedAnswers = localStorage.getItem('kareer_answers');
+      if (savedAnswers) {
+        try {
+          answers = JSON.parse(savedAnswers);
+          if (answers.length === 35 && !answers.includes(null)) {
+            showResult();
+            return;
+          }
+        } catch (e) {
+          console.error("Error loading saved answers:", e);
+        }
+      }
+
       const area = document.getElementById('questionArea');
-      const names = { 5: "Rất đúng", 4: "Khá đúng", 3: "Bình thường", 2: "Ít đúng", 1: "Không đúng" };
-      let html = `<div class="scale-header">${['RẤT ĐÚNG', 'KHÁ ĐÚNG', 'BÌNH THƯỜNG', 'ÍT ĐÚNG', 'KHÔNG ĐÚNG'].map(l => `<div class="scale-label">${l.split(' ').map(s => `<span>${s}</span>`).join('')}</div>`).join('')}</div><div class="questions-list">`;
+      const names = { 1: "Không đúng", 2: "Ít đúng", 3: "Bình thường", 4: "Khá đúng", 5: "Rất đúng" };
+      let html = `<div class="scale-header">${['KHÔNG ĐÚNG', 'ÍT ĐÚNG', 'BÌNH THƯỜNG', 'KHÁ ĐÚNG', 'RẤT ĐÚNG'].map(l => `<div class="scale-label">${l.split(' ').map(s => `<span>${s}</span>`).join('')}</div>`).join('')}</div><div class="questions-list">`;
       questions.forEach((q, i) => {
-        html += `<div class="q-item" id="q-${i}"><div class="q-text">${q.text}</div><div class="options-row">${[5, 4, 3, 2, 1].map(s => `<label class="opt-label" title="${names[s]}"><input type="radio" name="q-${i}" value="${s}" ${answers[i] === s ? 'checked' : ''} onchange="saveAns(${i}, ${s})"><div class="opt-circle"></div></label>`).join('')}</div></div>`;
+        html += `<div class="q-item" id="q-${i}"><div class="q-text">${q.text}</div><div class="options-row">${[1, 2, 3, 4, 5].map(s => `<label class="opt-label" title="${names[s]}"><input type="radio" name="q-${i}" value="${s}" ${answers[i] === s ? 'checked' : ''} onchange="saveAns(${i}, ${s})"><div class="opt-circle"></div></label>`).join('')}</div></div>`;
       });
       area.innerHTML = html + `</div>`;
     }
@@ -672,6 +689,9 @@
     function showResult() {
       try {
         const a = answers;
+        // Save answers to allow viewing again
+        localStorage.setItem('kareer_answers', JSON.stringify(a));
+
         const scoreModel = (items) => {
           let raw = 0, max = 0;
           items.forEach(it => { raw += (it.w > 0 ? a[it.qi] : (6 - a[it.qi])); max += 5; });
@@ -718,6 +738,31 @@
         const sorted = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
         const top = sorted[0], secondary = sorted[1] || top;
         const profile = JSON.parse(localStorage.getItem('kareer_profile') || '{"name":"Bạn"}');
+
+        // Save pure quiz result for matrix and other pages
+        const quizResult = {
+          scores: scores,
+          riasec: riasec,
+          bigFive: bigFive,
+          schwartz: schwartz,
+          sorted: sorted,
+          topGroup: top,
+          secondGroup: secondary,
+          timestamp: new Date().toISOString()
+        };
+        localStorage.setItem('kareer_result', JSON.stringify(quizResult));
+
+        if (typeof KareerAPI !== 'undefined') {
+          KareerAPI.saveAssessment({
+            answers: a,
+            scores: scores,
+            riasec: riasec,
+            big_five: bigFive,
+            schwartz: schwartz,
+            top_group: top,
+            second_group: secondary
+          }).catch(() => { });
+        }
 
         const renderSection = (title, data, descKey) => {
           return `
@@ -786,7 +831,7 @@
           <div class="result-actions" style="display: flex; gap: 15px; justify-content: center; margin-top: 40px;">
             <button class="btn btn-ghost" onclick="window.location.href='index.html'">Trang chủ</button>
             <button class="btn btn-primary" style="background: #111; color: white;" onclick="window.location.href='step3.html'">Khám phá ma trận nghề nghiệp</button>
-            <button class="btn btn-ghost" onclick="location.reload()">Làm lại</button>
+            <button class="btn btn-ghost" onclick="retakeTest()">Làm lại</button>
           </div>
         `;
 
@@ -797,6 +842,13 @@
         document.getElementById('resultScreen').style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) { console.error(err); showToast("Có lỗi xảy ra. Vui lòng thử lại."); }
+    }
+
+    function retakeTest() {
+      if (confirm("Bạn có chắc chắn muốn làm lại bài test? Kết quả hiện tại sẽ bị xóa.")) {
+        localStorage.removeItem('kareer_answers');
+        location.reload();
+      }
     }
 
     function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }

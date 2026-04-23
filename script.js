@@ -35,35 +35,61 @@ document.addEventListener('DOMContentLoaded', () => {
         const characters = quoteElement.querySelectorAll('.char');
         let currentIndex = 0;
         const typingSpeed = 30;
+        let typingTimeout;
+        let isSkipped = false;
+
+        function finishSequence() {
+            if (currentIndex >= characters.length && !isSkipped) return;
+            
+            clearTimeout(typingTimeout);
+            isSkipped = true;
+            
+            // Show all characters
+            characters.forEach(char => char.classList.add('visible'));
+            currentIndex = characters.length;
+
+            // Trigger final animations
+            quoteIconBottom.classList.add('visible');
+            setTimeout(() => {
+                authorElement.style.opacity = '1';
+                authorElement.style.transform = 'translateY(0)';
+
+                buttonWrapper.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
+                buttonWrapper.style.opacity = '1';
+                buttonWrapper.style.transform = 'translateY(0)';
+                buttonWrapper.style.flexDirection = 'column';
+                buttonWrapper.style.alignItems = 'center';
+
+                // Check for saved results to show the view results button
+                const savedResults = localStorage.getItem('kareer_answers');
+                const viewResultsBtn = document.getElementById('view-results-btn');
+                if (savedResults && viewResultsBtn) {
+                    viewResultsBtn.style.display = 'flex';
+                    viewResultsBtn.addEventListener('click', () => {
+                        window.location.href = 'step2.html';
+                    });
+                }
+
+                document.body.style.overflowY = 'auto';
+                if (featuresSection) {
+                    featuresSection.classList.add('visible');
+                }
+                if (stepsSection) {
+                    stepsSection.style.opacity = '1';
+                    stepsSection.style.transform = 'translateY(0)';
+                }
+            }, 600);
+        }
 
         function drawText() {
+            if (isSkipped) return;
+            
             if (currentIndex < characters.length) {
                 characters[currentIndex].classList.add('visible');
                 currentIndex++;
-                setTimeout(drawText, charTypeDelay(characters[currentIndex - 1].textContent));
+                typingTimeout = setTimeout(drawText, charTypeDelay(characters[currentIndex - 1].textContent));
             } else {
-                // FINISHED DRAWING
-                quoteIconBottom.classList.add('visible');
-                setTimeout(() => {
-                    // Show Author
-                    authorElement.style.opacity = '1';
-                    authorElement.style.transform = 'translateY(0)';
-
-                    // Show Button
-                    buttonWrapper.style.transition = 'all 1.2s cubic-bezier(0.16, 1, 0.3, 1)';
-                    buttonWrapper.style.opacity = '1';
-                    buttonWrapper.style.transform = 'translateY(0)';
-
-                    // UNLOCK SCROLL & SHOW FEATURES
-                    document.body.style.overflowY = 'auto';
-                    if (featuresSection) {
-                        featuresSection.classList.add('visible');
-                    }
-                    if (stepsSection) {
-                        stepsSection.style.opacity = '1';
-                        stepsSection.style.transform = 'translateY(0)';
-                    }
-                }, 600);
+                finishSequence();
             }
         }
 
@@ -72,6 +98,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (char === ',' || char === '.') return 200;
             return typingSpeed + (Math.random() * 20);
         }
+
+        // Skip on click
+        document.addEventListener('click', (e) => {
+            if (currentIndex < characters.length && !isSkipped) {
+                // Ensure we don't skip if clicking specific interactive elements if needed, 
+                // but usually for a hero section skipping is fine on any click.
+                finishSequence();
+            }
+        });
 
         // Start Sequence
         setTimeout(() => {

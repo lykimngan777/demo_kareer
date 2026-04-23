@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userScores = quizResult.scores || {};
 
     const groupToRiasec = {
-        technical: 'R', analyst: 'I', creative: 'A', social: 'S', leader: 'E', order: 'C'
+        realistic: 'R', investigative: 'I', artistic: 'A', social: 'S', enterprising: 'E', conventional: 'C'
     };
 
     const userRiasec = {};
@@ -87,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const updateTabs = (careerName) => {
             // Updated paths - flat structure
-            if (tabDetail) tabDetail.onclick = () => location.href = `timeline.html?career=${encodeURIComponent(careerName)}`;
-            if (tabRoadmap) tabRoadmap.onclick = () => location.href = `roadmap.html?career=${encodeURIComponent(careerName)}`;
+            if (tabDetail) tabDetail.setAttribute('href', `timeline.html?career=${encodeURIComponent(careerName)}`);
+            if (tabRoadmap) tabRoadmap.setAttribute('href', `roadmap.html?career=${encodeURIComponent(careerName)}`);
         };
 
         const selectCareer = (careerName, dotElement = null, fitLevel = null) => {
@@ -235,34 +235,80 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!modal) return;
 
             const profile = JSON.parse(localStorage.getItem('kareer_profile') || '{}');
+            const quizResult = JSON.parse(localStorage.getItem('kareer_result') || '{}');
             const userName = profile.name || 'Bạn';
 
             const sortedRiasec = Object.entries(userRiasec).sort(([, a], [, b]) => b - a);
             const topType = sortedRiasec[0][0];
+            const secType = sortedRiasec[1][0];
 
             const typeNames = {
-                'R': 'Người Thực tế (Realistic)', 'I': 'Người Nghiên cứu (Investigative)',
-                'A': 'Người Nghệ thuật (Artistic)', 'S': 'Người Xã hội (Social)',
-                'E': 'Người Quản lý (Enterprising)', 'C': 'Người Nề nếp (Conventional)'
+                'R': 'Thực tế (Realistic)', 'I': 'Nghiên cứu (Investigative)',
+                'A': 'Nghệ thuật (Artistic)', 'S': 'Xã hội (Social)',
+                'E': 'Quản lý (Enterprising)', 'C': 'Nề nếp (Conventional)'
             };
 
-            const analysisData = {
-                'R': "Bạn sở hữu bộ kỹ năng thao tác thực tế xuất sắc cùng nền tảng kiến thức logic sắc bén. Sự kiên trì trong việc giải quyết các vấn đề kỹ thuật là vũ khí mạnh nhất giúp bạn vượt qua thử thách. Tuy nhiên, hãy lưu ý cân bằng giữa chuyên môn kỹ thuật và yếu tố cảm xúc trong giao tiếp.",
-                'I': "Kiến thức chuyên sâu, tư duy phản biện và khả năng quan sát nhạy bén là những giá trị cốt lõi làm nên con người bạn. Bạn có kỹ năng nhìn thấu gốc rễ của vấn đề, dù đôi khi có thể sa lầy vào việc nghiên cứu quá mức.",
-                'A': "Sự sáng tạo không giới hạn và bộ kỹ năng thiết kế, biểu đạt cảm xúc giúp bạn luôn có những góc nhìn độc đáo. Bạn có kiến thức phong phú về thẩm mỹ và khả năng truyền tải ý tưởng một cách tự nhiên.",
-                'S': "Kỹ năng thấu cảm và vốn kiến thức về tâm lý, xã hội giúp bạn kết nối mọi người một cách kỳ diệu. Sự chân thành trong truyền đạt là công cụ mạnh mẽ nhất giúp bạn gây dựng lòng tin và dẫn dắt cộng đồng.",
-                'E': "Kỹ năng quyết đoán, khả năng thuyết phục và kiến thức quản trị chiến lược là động cơ thúc đẩy bạn tiến về phía trước. Bạn có tố chất của một người dẫn đầu, luôn biết cách truyền cảm hứng để đạt được mục tiêu lớn.",
-                'C': "Kỹ năng tổ chức khoa học, sự tỉ mỉ và kiến thức quản trị rủi ro là nền tảng vững chắc cho sự nghiệp của bạn. Bạn là 'xương sống' của mọi tổ chức nhờ khả năng kiểm soát vận hành tuyệt đối."
+            const identityTraits = {
+                'R': "Bạn là người có tư duy thực chứng, coi trọng giá trị hữu hình và sự vận hành chuẩn xác của máy móc, công nghệ.",
+                'I': "Bản sắc của bạn gắn liền với sự tò mò trí tuệ, khả năng phân tích đa chiều và nhu cầu tìm hiểu gốc rễ vấn đề.",
+                'A': "Bạn sở hữu một trực giác nhạy bén, tâm hồn tự do và nhu cầu biểu đạt cá tính thông qua các giải pháp sáng tạo.",
+                'S': "Giá trị cốt lõi của bạn nằm ở sự thấu cảm, khả năng kết nối và khát khao đóng góp cho sự phát triển của con người.",
+                'E': "Bạn là người tràn đầy năng lượng mục tiêu, có khả năng dẫn dắt và thuyết phục người khác bằng tầm nhìn của mình.",
+                'C': "Sự kỷ luật, tính hệ thống và khả năng kiểm soát dữ liệu là những nền tảng tạo nên bản sắc chuyên nghiệp của bạn."
             };
 
-            const userAnalysis = analysisData[topType] || analysisData['R'];
+            const strategyAdvice = {
+                'R': "Hãy tập trung vào việc làm chủ các công nghệ lõi và bổ sung thêm tư duy thiết kế hệ thống để tối ưu hiệu suất.",
+                'I': "Bạn nên tham gia vào các dự án nghiên cứu chuyên sâu hoặc phân tích chiến lược, nơi trí tuệ được thách thức tối đa.",
+                'A': "Tìm kiếm môi trường cho phép sự linh hoạt, tránh các quy trình gò bó để năng lực đổi mới không bị mai một.",
+                'S': "Phát triển thêm kỹ năng quản trị xung đột và điều phối nhóm sẽ giúp bạn trở thành một nhà tư vấn/đào tạo xuất sắc.",
+                'E': "Xây dựng mạng lưới quan hệ rộng và học cách quản trị rủi ro sẽ giúp các quyết định dẫn dắt của bạn trở nên bền vững hơn.",
+                'C': "Tận dụng thế mạnh về tổ chức để xây dựng các quy trình chuẩn cho doanh nghiệp hoặc chuyên sâu vào quản trị tài chính."
+            };
 
             const fullAnalysis = `
-                <div style="text-align: left; max-width: 700px; margin: 0 auto; line-height: 1.8;">
-                    <div style="margin-bottom: 2.5rem; border-bottom: 1px solid #eee; padding-bottom: 1.5rem;">
-                        <h1 style="font-size: 2rem; font-weight: 800; color: #111; letter-spacing: -0.02em;">Nhóm ${typeNames[topType]}</h1>
+                <div class="analysis-report-container">
+                    <header class="report-header">
+                        <span class="report-tag">BÁO CÁO PHÂN TÍCH CHUYÊN SÂU</span>
+                        <h1 class="report-main-title">Hồ Sơ Bản Sắc Nghề Nghiệp</h1>
+                    </header>
+
+                    <div class="report-section">
+                        <h2 class="section-title">1. Phân tích Bản sắc cá nhân</h2>
+                        <p class="section-p">
+                            Dựa trên phản hồi từ bài test đa chiều, hệ thống nhận diện bạn là một cá nhân có bản sắc <strong>${typeNames[topType]}</strong> rõ rệt. ${identityTraits[topType]} 
+                            Sự kết hợp thêm yếu tố <strong>${typeNames[secType]}</strong> tạo nên một biến số độc đáo: Bạn không chỉ thực hiện nhiệm vụ một cách máy móc mà luôn có sự 
+                            ${secType === 'I' ? 'đào sâu suy nghĩ' : secType === 'A' ? 'biến tấu sáng tạo' : secType === 'E' ? 'định hướng mục tiêu' : 'cân nhắc kỹ lưỡng'}.
+                        </p>
                     </div>
-                    <p style="font-size: 1.2rem; color: #333; font-weight: 400; text-align: justify;">${userAnalysis}</p>
+
+                    <div class="report-section">
+                        <h2 class="section-title">2. Lập luận về sự tương thích nghề nghiệp</h2>
+                        <p class="section-p">
+                            Lý do bạn cảm thấy bị thu hút bởi các công việc trong ma trận là do sự tương đồng giữa <strong>Cấu trúc tư duy</strong> của bạn và <strong>Đặc thù lĩnh vực</strong>. 
+                            Các vị trí nằm ở quỹ đạo gần tâm nhất phản ánh nơi mà các kỹ năng tự nhiên của bạn được phát huy với ít nỗ lực nhất nhưng mang lại hiệu quả cao nhất.
+                            Mối liên kết giữa nhóm ${typeNames[topType]} và ${typeNames[secType]} cho thấy bạn sẽ tỏa sáng nhất trong các vai trò yêu cầu sự giao thoa giữa 
+                            ${topType === 'R' ? 'kỹ thuật' : topType === 'I' ? 'trí tuệ' : 'kỹ năng'} và ${secType === 'S' ? 'con người' : 'quy trình'}.
+                        </p>
+                    </div>
+
+                    <div class="report-section">
+                        <h2 class="section-title">3. Kết luận</h2>
+                        <div class="advice-grid">
+                            <div class="advice-card">
+                                <h3>Trọng tâm phát triển</h3>
+                                <p>${strategyAdvice[topType]}</p>
+                            </div>
+                            <div class="advice-card">
+                                <h3>Điểm cần lưu ý</h3>
+                                <p>Đôi khi sự quá tập trung vào ${topType === 'C' ? 'chi tiết' : topType === 'E' ? 'thành tích' : 'ý tưởng'} có thể khiến bạn bỏ lỡ cái nhìn tổng quan. Hãy học cách cân bằng lại bằng cách phối hợp với những người thuộc nhóm đối lập trên ma trận.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="report-footer">
+                        <p>Báo cáo được trích xuất dựa trên mô hình tâm lý học nghề nghiệp RIASEC & hệ thống dữ liệu thị trường Kareer.</p>
+                    </footer>
                 </div>
             `;
 

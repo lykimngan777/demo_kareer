@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lộ trình thăng tiến | Matrix</title>
+    <title>Chi tiết nghề nghiệp | Kareer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
-        rel="stylesheet">
-    <!-- Updated: step3.css (was style.css in subfolder) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="step3.css">
     <style>
         body {
             overflow-y: auto !important;
             overflow-x: hidden !important;
+            background: #fdfdfd;
         }
 
         .timeline-view {
             min-height: 100vh;
-            background: #f8f9fa;
-            padding: 4rem 2rem;
+            padding: 8rem 2rem 6rem;
             display: flex;
             flex-direction: column;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .timeline-header {
@@ -38,6 +36,7 @@
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
             color: #111;
+            font-weight: 900;
         }
 
         .timeline-header p {
@@ -48,28 +47,28 @@
         }
 
         .back-btn {
-            position: absolute;
+            position: fixed;
             top: 2rem;
             left: 2rem;
             padding: 0.8rem 1.5rem;
-            background: #fff;
-            color: #111;
+            background: #000;
+            color: #fff;
             border-radius: 50px;
             font-family: var(--font-heading);
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.85rem;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateX(-5px);
+            background: #333;
         }
 
         .progress-timeline {
@@ -165,83 +164,59 @@
             transform: translateY(0);
         }
 
-        .detail-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #f5f5f5;
-        }
-
-        .detail-title h2 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #111;
-        }
-
-        .detail-time {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #666;
-            background: #f8f9fa;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-        }
-
-        .detail-body h3 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            color: #333;
-        }
-
-        .detail-body p {
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-
-        .task-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.2rem;
-        }
-
-        .task-item {
+        .filter-box {
+            background: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            font-size: 0.95rem;
-            color: #444;
-            padding: 1rem;
-            background: #fafafa;
-            border-radius: 12px;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 600px;
             border: 1px solid #f0f0f0;
+            z-index: 10;
         }
 
-        .task-icon {
-            color: #000;
-            font-weight: 900;
+        .select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 100%;
+        }
+
+        .select-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .select-group select {
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            font-size: 1rem;
+            color: #111;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .select-group select:hover {
+            border-color: #000;
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @media (max-width: 768px) {
-            .timeline-view {
-                padding: 4rem 1rem;
-            }
-
             .progress-timeline {
                 flex-direction: column;
                 align-items: flex-start;
@@ -272,22 +247,29 @@
                 text-align: left;
                 max-width: none;
             }
-
-            .detail-card {
-                padding: 2rem 1.5rem;
-            }
         }
     </style>
 </head>
 
 <body>
+    <div class="tab-container">
+        <a href="step3.html" class="tab-item">Mở lối sự nghiệp</a>
+        <a href="#" class="tab-item active">Chi tiết nghề nghiệp</a>
+        <a href="roadmap.html" class="tab-item">Lộ trình phát triển</a>
+    </div>
+
     <div class="timeline-view">
-        <!-- Updated: step3.html (was index.html in subfolder) -->
         <a href="step3.html" class="back-btn"><span>← Quay lại</span></a>
 
-        <div class="timeline-header">
-            <h1>Lộ trình thăng tiến sự nghiệp</h1>
-            <p>Khám phá các cột mốc quan trọng và những kỹ năng cần thiết để đạt được đỉnh cao trong nghề nghiệp.</p>
+
+
+        <div class="filter-box">
+            <div class="select-group">
+                <label>Vị trí công việc mục tiêu</label>
+                <select id="role-filter">
+                    <!-- Options populated by JS -->
+                </select>
+            </div>
         </div>
 
         <div class="progress-timeline" id="timeline">
@@ -318,34 +300,202 @@
     </div>
 
     <script>
-        const timelineData = [
-            {
-                title: "Thực tập sinh (Intern)", time: "0 - 6 tháng",
-                desc: "Giai đoạn này bạn tập trung vào việc học hỏi quy trình, làm quen với công cụ và hỗ trợ các dự án nhỏ dưới sự hướng dẫn của mentor.",
-                tasks: ["Nắm vững Figma", "Học quy trình Design Thinking", "Làm quen với Agile/Scrum", "Hỗ trợ UI Audit"]
-            },
-            {
-                title: "Junior Designer", time: "6 tháng - 2 năm",
-                desc: "Bạn bắt đầu đảm nhận các tính năng độc lập, thực hiện nghiên cứu người dùng cơ bản và cộng tác trực tiếp với đội ngũ kỹ thuật.",
-                tasks: ["Thiết kế User Flow", "Tạo Wireframe độ phân giải cao", "Thực hiện Usability Testing", "Xây dựng Component Library"]
-            },
-            {
-                title: "Middle Designer", time: "2 - 5 năm",
-                desc: "Giai đoạn này bạn cần có tư duy sản phẩm sâu sắc hơn, có khả năng giải quyết các bài toán UX phức tạp và định hướng cho Junior.",
-                tasks: ["Xây dựng Design System", "Phân tích dữ liệu người dùng", "Tối ưu hóa trải nghiệm chuyển đổi", "Phản biện và bảo vệ thiết kế"]
-            },
-            {
-                title: "Senior / Lead Designer", time: "5 năm +",
-                desc: "Bạn đóng vai trò chiến lược, định hướng tầm nhìn sản phẩm và dẫn dắt đội ngũ thiết kế đạt được các mục tiêu kinh doanh.",
-                tasks: ["Định hướng trải nghiệm thương hiệu", "Quản lý nguồn lực thiết kế", "Xây dựng chiến lược sản phẩm", "Đào tạo và phát triển đội ngũ"]
-            }
+        const careerList = [
+            "Kỹ sư phần mềm", "Chuyên viên Phân tích dữ liệu", "Nhà thiết kế UX/UI", 
+            "Quản lý Dự án IT", "Chuyên viên Marketing số", "Kế toán trưởng", 
+            "Chuyên viên Nhân sự", "Kiến trúc sư", "Bác sĩ Đa khoa", 
+            "Chuyên viên Tư vấn Tài chính", "Nhà tâm lý học", "Kỹ sư Cơ khí", 
+            "Kiểm toán viên", "Chuyên viên PR & Truyền thông", "Lập trình viên AI/ML", 
+            "Quản lý Chuỗi cung ứng", "Nhà thiết kế thời trang", "Giáo viên Tiếng Anh", 
+            "Chuyên viên Luật", "Doanh nhân / Founder", "Quản lý Khách sạn", 
+            "Nhà khoa học dữ liệu"
         ];
 
+        const roleCategories = {
+            tech: ["Kỹ sư phần mềm", "Lập trình viên AI/ML", "Nhà khoa học dữ liệu", "Kỹ sư Cơ khí", "Quản lý Dự án IT", "Chuyên viên Phân tích dữ liệu"],
+            creative: ["Nhà thiết kế UX/UI", "Nhà thiết kế thời trang", "Kiến trúc sư", "Chuyên viên PR & Truyền thông"],
+            business: ["Chuyên viên Marketing số", "Kế toán trưởng", "Kiểm toán viên", "Quản lý Chuỗi cung ứng", "Chuyên viên Tư vấn Tài chính", "Quản lý Khách sạn", "Doanh nhân / Founder"],
+            social: ["Chuyên viên Nhân sự", "Bác sĩ Đa khoa", "Nhà tâm lý học", "Giáo viên Tiếng Anh", "Chuyên viên Luật"]
+        };
+
+        const categorySkills = {
+            tech: ["Lập trình ứng dụng", "Hệ quản trị CSDL", "Kiến trúc hệ thống", "Cloud Computing", "Cybersecurity"],
+            creative: ["Tư duy thiết kế", "Sáng tạo nội dung", "Kỹ thuật đồ họa", "Nghiên cứu người dùng", "Truyền thông thị giác"],
+            business: ["Quản trị dự án", "Phân tích thị trường", "Kỹ năng đàm phán", "Quản trị rủi ro", "Tư duy chiến lược"],
+            social: ["Kỹ năng tham vấn", "Giao tiếp liên nhân", "Quản trị nhân sự", "Pháp luật & Đạo đức", "Thấu cảm & Hỗ trợ"]
+        };
+
+        function generateCustomTimeline(targetRole, profile) {
+            const basePos = profile.position || "Người mới bắt đầu";
+            const category = Object.keys(roleCategories).find(key => roleCategories[key].includes(targetRole)) || 'business';
+            const skills = categorySkills[category];
+
+            return [
+                {
+                    title: `Thử việc (${basePos} Transition)`, time: "0 - 6 tháng",
+                    desc: `Tận dụng nền tảng <strong>${basePos}</strong> để làm quen với quy trình mới và thiết lập các mối quan hệ chuyên môn ban đầu.`,
+                    tasks: ["Tìm hiểu quy trình nội bộ", "Làm chủ bộ công cụ làm việc", "Hỗ trợ các dự án đang triển khai", "Thiết lập mục tiêu cá nhân"]
+                },
+                {
+                    title: `Nhân viên ${targetRole}`, time: "6 tháng - 2 năm",
+                    desc: `Trở thành thành viên nòng cốt, độc lập xử lý các tác vụ chuyên môn về <strong>${skills[0]}</strong> và <strong>${skills[1]}</strong>.`,
+                    tasks: [`Xử lý ${skills[0]} độc lập`, "Nâng cao hiệu suất làm việc", "Phối hợp liên phòng ban", "Đề xuất sáng kiến cải tiến"]
+                },
+                {
+                    title: `Chuyên viên ${targetRole} cấp cao`, time: "2 - 5 năm",
+                    desc: `Dẫn dắt các mảng công việc phức tạp, mentor cho thế hệ mới và làm chủ <strong>${skills[2]}</strong> cùng <strong>${skills[3]}</strong>.`,
+                    tasks: [`Quản lý ${skills[2]} chiến lược`, "Giải quyết các vấn đề kỹ thuật khó", "Đào tạo và hướng dẫn Junior", "Tối ưu quy trình vận hành"]
+                },
+                {
+                    title: `Lãnh đạo / Chuyên gia ${targetRole}`, time: "5 năm +",
+                    desc: `Định hình tầm nhìn phát triển lâu dài, chịu trách nhiệm về <strong>${skills[4]}</strong> và chiến lược tăng trưởng bền vững.`,
+                    tasks: ["Hoạch định chiến lược dài hạn", "Quản trị rủi ro & Nguồn lực", "Xây dựng văn hóa chuyên môn", "Đạt các KPI chiến lược"]
+                }
+            ];
+        }
+
+        const timelineDataByRole = {
+            'Nhà thiết kế UX/UI': [
+                {
+                    title: "Thực tập sinh (Intern)", time: "0 - 6 tháng",
+                    desc: "Giai đoạn này bạn tập trung vào việc học hỏi quy trình, làm quen với công cụ và hỗ trợ các dự án nhỏ dưới sự hướng dẫn của mentor.",
+                    tasks: ["Nắm vững Figma", "Học quy trình Design Thinking", "Làm quen với Agile/Scrum", "Hỗ trợ UI Audit"]
+                },
+                {
+                    title: "Junior Designer", time: "6 tháng - 2 năm",
+                    desc: "Bạn bắt đầu đảm nhận các tính năng độc lập, thực hiện nghiên cứu người dùng cơ bản và cộng tác trực tiếp với đội ngũ kỹ thuật.",
+                    tasks: ["Thiết kế User Flow", "Tạo Wireframe độ phân giải cao", "Thực hiện Usability Testing", "Xây dựng Component Library"]
+                },
+                {
+                    title: "Middle Designer", time: "2 - 5 năm",
+                    desc: "Giai đoạn này bạn cần có tư duy sản phẩm sâu sắc hơn, có khả năng giải quyết các bài toán UX phức tạp và định hướng cho Junior.",
+                    tasks: ["Xây dựng Design System", "Phân tích dữ liệu người dùng", "Tối ưu hóa trải nghiệm chuyển đổi", "Phản biện và bảo vệ thiết kế"]
+                },
+                {
+                    title: "Senior / Lead Designer", time: "5 năm +",
+                    desc: "Bạn đóng vai trò chiến lược, định hướng tầm nhìn sản phẩm và dẫn dắt đội ngũ thiết kế đạt được các mục tiêu kinh doanh.",
+                    tasks: ["Định hướng trải nghiệm thương hiệu", "Quản lý nguồn lực thiết kế", "Xây dựng chiến lược sản phẩm", "Đào tạo và phát triển đội ngũ"]
+                }
+            ],
+            'Giáo viên Tiếng Anh': [
+                {
+                    title: "Trợ giảng / Giáo viên tập sự", time: "0 - 1 năm",
+                    desc: "Học hỏi phương pháp quản lý lớp học, hỗ trợ soạn giáo án và làm quen với các bộ giáo trình chuẩn quốc tế.",
+                    tasks: ["Quản lý nề nếp lớp học", "Hỗ trợ chấm bài & chỉnh phát âm", "Soạn bài giảng bổ trợ", "Tham gia các buổi training sư phạm"]
+                },
+                {
+                    title: "Giáo viên chính thức", time: "1 - 3 năm",
+                    desc: "Đứng lớp độc lập, chịu trách nhiệm về chất lượng đầu ra của học viên và nâng cao kỹ năng sư phạm chuyên sâu.",
+                    tasks: ["Giảng dạy các lớp mục tiêu", "Luyện thi IELTS/TOEIC/SAT", "Xây dựng giáo trình cá nhân hóa", "Tư vấn lộ trình học tập"]
+                },
+                {
+                    title: "Tổ trưởng bộ môn", time: "3 - 7 năm",
+                    desc: "Quản lý chất lượng giảng dạy của tổ, đào tạo giáo viên mới và phát triển các sản phẩm giáo dục mới.",
+                    tasks: ["Dự giờ & góp ý chuyên môn", "Thiết kế khung chương trình học", "Quản lý đội ngũ giáo viên", "Tổ chức hội thảo chuyên đề"]
+                },
+                {
+                    title: "Giám đốc đào tạo / Hiệu trưởng", time: "7 năm +",
+                    desc: "Định hướng chiến lược phát triển học thuật, quản trị vận hành trung tâm/trường học và xây dựng thương hiệu giáo dục.",
+                    tasks: ["Xây dựng chiến lược đào tạo", "Quản trị vận hành & tài chính", "Thiết lập quan hệ đối tác", "Phát triển tầm nhìn sư phạm"]
+                }
+            ],
+            'Kỹ sư phần mềm': [
+                {
+                    title: "Intern / Junior Developer", time: "0 - 2 năm",
+                    desc: "Làm quen với codebase, học quy trình làm việc Agile/Scrum và hoàn thành các task nhỏ dưới sự hướng dẫn của Senior.",
+                    tasks: ["Viết code sạch & UnitTest", "Fix bug & maintenance", "Tìm hiểu kiến trúc hệ thống", "Học hỏi từ code review"]
+                },
+                {
+                    title: "Middle Software Engineer", time: "2 - 5 năm",
+                    desc: "Đảm nhận các tính năng phức tạp, tự chủ trong việc thiết kế module và bắt đầu hỗ trợ các thành viên mới.",
+                    tasks: ["Thiết kế logic module", "Tối ưu hiệu suất code", "Viết tài liệu kỹ thuật", "Mentor cho Intern/Junior"]
+                },
+                {
+                    title: "Senior / Tech Lead", time: "5 - 8 năm",
+                    desc: "Quyết định kiến trúc hệ thống, giải quyết các vấn đề kỹ thuật khó và dẫn dắt đội ngũ kỹ thuật về mặt chuyên môn.",
+                    tasks: ["Thiết kế kiến trúc hệ thống", "Review kiến trúc & bảo mật", "Giải quyết tech debt", "Quản lý tiến độ kỹ thuật"]
+                },
+                {
+                    title: "Software Architect / CTO", time: "8 năm +",
+                    desc: "Định hướng công nghệ cho toàn công ty, đưa ra các quyết định chiến lược về hạ tầng và xây dựng văn hóa kỹ thuật.",
+                    tasks: ["Xây dựng chiến lược công nghệ", "Quản lý ngân sách IT", "Tuyển dụng & giữ chân nhân tài", "Tối ưu hóa quy trình R&D"]
+                }
+            ],
+            'default': [
+                {
+                    title: "Thực tập / Thử việc", time: "0 - 6 tháng",
+                    desc: "Tiếp cận môi trường chuyên nghiệp, học hỏi nền tảng cơ bản và hoàn thiện các kỹ năng thiết yếu trong ngành.",
+                    tasks: ["Tìm hiểu quy trình", "Làm chủ công cụ làm việc", "Hỗ trợ dự án", "Báo cáo cập nhật công việc"]
+                },
+                {
+                    title: "Nhân viên thực hiện", time: "6 tháng - 2 năm",
+                    desc: "Độc lập giải quyết các công việc chuyên môn, đóng góp vào mục tiêu chung và xây dựng tư duy phản biện.",
+                    tasks: ["Xử lý tác vụ độc lập", "Phối hợp làm việc nhóm", "Tối ưu hoá hiệu suất", "Đóng góp sáng kiến cải tiến"]
+                },
+                {
+                    title: "Chuyên viên nòng cốt", time: "2 - 5 năm",
+                    desc: "Nắm vững chuyên môn sâu, dẫn dắt các dự án quan trọng và đóng vai trò cầu nối trong đội ngũ.",
+                    tasks: ["Quản lý dự án chuyên môn", "Giải quyết vấn đề phức tạp", "Mentor thành viên mới", "Phân tích dữ liệu hiệu quả"]
+                },
+                {
+                    title: "Lãnh đạo / Chuyên gia cấp cao", time: "5 năm +",
+                    desc: "Định hình tầm nhìn, quản trị rủi ro và chịu trách nhiệm tối thượng về thành quả chiến lược.",
+                    tasks: ["Hoạch định chiến lược", "Quản trị nguồn lực", "Xây dựng văn hóa", "Đạt mục tiêu tổ chức"]
+                }
+            ]
+        };
+
+        let currentActiveStep = 0;
+
+        function initDropdown() {
+            const roleFilter = document.getElementById('role-filter');
+            roleFilter.innerHTML = careerList.map(c => `<option value="${c}">${c}</option>`).join('');
+            
+            const selectedCareer = localStorage.getItem('selectedCareer');
+            if (selectedCareer && careerList.includes(selectedCareer)) {
+                roleFilter.value = selectedCareer;
+            }
+
+            roleFilter.addEventListener('change', () => {
+                localStorage.setItem('selectedCareer', roleFilter.value);
+                updateStepLabels();
+                showStep(currentActiveStep);
+            });
+        }
+
+        function updateStepLabels() {
+            const role = document.getElementById('role-filter').value;
+            const profile = JSON.parse(localStorage.getItem('kareer_profile') || '{}');
+            const dataList = generateCustomTimeline(role, profile);
+            const labels = document.querySelectorAll('.step-label');
+            labels.forEach((label, i) => {
+                if (dataList[i]) {
+                    label.textContent = dataList[i].title;
+                }
+            });
+        }
+
         function showStep(index) {
+            currentActiveStep = index;
             const steps = document.querySelectorAll('.timeline-step');
             const fill = document.getElementById('progress-fill');
             const card = document.getElementById('detail-card');
             const content = document.getElementById('detail-content');
+            const role = document.getElementById('role-filter').value;
+
+            const quizResult = JSON.parse(localStorage.getItem('kareer_result') || '{}');
+            const userScores = quizResult.scores || {};
+            const profile = JSON.parse(localStorage.getItem('kareer_profile') || '{}');
+            
+            const topTraits = Object.entries(userScores)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 2)
+                .map(([trait]) => trait);
+
+            const traitLabels = {
+                realistic: 'Thực tế (R)', investigative: 'Nghiên cứu (I)', artistic: 'Nghệ thuật (A)',
+                social: 'Xã hội (S)', enterprising: 'Quản lý (E)', conventional: 'Nghiệp vụ (C)'
+            };
 
             steps.forEach((s, i) => {
                 if (i <= index) s.classList.add('active');
@@ -355,8 +505,18 @@
             const percentage = (index / (steps.length - 1)) * 75;
             fill.style.width = `${percentage}%`;
 
-            const data = timelineData[index];
+            const dataList = generateCustomTimeline(role, profile);
+            const data = dataList[index];
+            
             card.classList.remove('show');
+
+            // Personalize Insight
+            let personalInsight = "";
+            if (index === 0) {
+                personalInsight = `Dựa trên phân tích, bạn có lợi thế lớn nhờ sự kết hợp giữa <strong>${traitLabels[topTraits[0]]}</strong> và nền tảng <strong>${profile.position || 'của mình'}</strong>. Hãy tập trung khai thác điểm này để gây ấn tượng trong giai đoạn đầu.`;
+            } else {
+                personalInsight = `Với tư duy <strong>${traitLabels[topTraits[0]]}</strong>, bạn sẽ dễ dàng làm chủ các kỹ năng cần thiết ở giai đoạn này nếu biết cách liên kết chúng với các dự án thực tế.`;
+            }
 
             setTimeout(() => {
                 content.innerHTML = `
@@ -365,6 +525,10 @@
                         <span class="detail-time">${data.time}</span>
                     </div>
                     <div class="detail-body">
+                        <div style="margin-bottom: 2rem; padding: 1.2rem; background: #f0f7ff; border-radius: 12px; border: 1px solid #cce3ff; font-size: 0.95rem; line-height: 1.6; color: #004a99;">
+                            <strong style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">💡 Phân tích từ Kareer</strong>
+                            ${personalInsight}
+                        </div>
                         <h3>Mục tiêu giai đoạn</h3>
                         <p>${data.desc}</p>
                         <h3>Kỹ năng & Nhiệm vụ cốt lõi</h3>
@@ -377,8 +541,9 @@
             }, 300);
         }
 
+        initDropdown();
+        updateStepLabels();
         showStep(0);
     </script>
 </body>
-
 </html>
