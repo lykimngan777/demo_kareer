@@ -15,78 +15,96 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const careerDatabase = [
-        { name: "Kỹ sư phần mềm", code: "2512", riasec: ["I", "R"], salary: "18-55 triệu VNĐ", market: "ITviec: Nhu cầu ổn định, ưu tiên Full-stack và Cloud." },
-        { name: "Chuyên viên Phân tích dữ liệu", code: "2511", riasec: ["I", "C"], salary: "15-45 triệu VNĐ", market: "Robert Walters: Tăng trưởng mạnh trong Tài chính và E-commerce." },
-        { name: "Nhà thiết kế UX/UI", code: "2166", riasec: ["A", "I"], salary: "15-40 triệu VNĐ", market: "Reeracoen: Cần kỹ năng nghiên cứu người dùng sâu." },
-        { name: "Quản lý Dự án IT", code: "2511", riasec: ["E", "C"], salary: "35-80 triệu VNĐ", market: "Robert Walters: Ưu tiên ứng viên có chứng chỉ PMP/Agile." },
-        { name: "Chuyên viên Marketing số", code: "2431", riasec: ["E", "A"], salary: "12-35 triệu VNĐ", market: "LinkedIn: Xu hướng chuyển dịch sang Data-driven Marketing." },
-        { name: "Kế toán trưởng", code: "2411", riasec: ["C", "E"], salary: "25-65 triệu VNĐ", market: "Adecco: Yêu cầu cao về tuân thủ và chứng chỉ quốc tế." },
-        { name: "Chuyên viên Nhân sự", code: "2423", riasec: ["S", "E"], salary: "12-30 triệu VNĐ", market: "Manpower: Tập trung vào giữ chân nhân tài và văn hóa." },
-        { name: "Kiến trúc sư", code: "2161", riasec: ["A", "R"], salary: "15-45 triệu VNĐ", market: "QĐ 34: Nhóm chuyên gia kỹ thuật bậc cao." },
-        { name: "Bác sĩ Đa khoa", code: "2211", riasec: ["I", "S"], salary: "25-100 triệu VNĐ", market: "Thị trường: Y tế tư nhân đang mở rộng mạnh mẽ." },
-        { name: "Chuyên viên Tư vấn Tài chính", code: "2412", riasec: ["E", "I"], salary: "20-120 triệu+ VNĐ", market: "Robert Walters: Thu nhập đột phá theo doanh số." },
-        { name: "Nhà tâm lý học", code: "2634", riasec: ["S", "I"], salary: "15-35 triệu VNĐ", market: "Xu hướng: Dịch vụ tham vấn học đường và doanh nghiệp." },
-        { name: "Kỹ sư Cơ khí", code: "2144", riasec: ["R", "I"], salary: "15-40 triệu VNĐ", market: "Reeracoen: Nhu cầu cao tại các KCN miền Bắc và Nam." },
-        { name: "Kiểm toán viên", code: "2411", riasec: ["C", "I"], salary: "12-50 triệu VNĐ", market: "Big4: Lộ trình thăng tiến rõ ràng, áp lực cao." },
-        { name: "Chuyên viên PR & Truyền thông", code: "2432", riasec: ["E", "S"], salary: "15-40 triệu VNĐ", market: "VietnamWorks: Cần mạng lưới báo chí và KOLs rộng." },
-        { name: "Lập trình viên AI/ML", code: "2512", riasec: ["I", "R"], salary: "45-130 triệu VNĐ", market: "ITviec: Cạnh tranh toàn cầu, cực kỳ khan hiếm." },
-        { name: "Quản lý Chuỗi cung ứng", code: "1324", riasec: ["C", "E"], salary: "35-90 triệu VNĐ", market: "Robert Walters: Vai trò chiến lược trong chuyển dịch FDI." },
-        { name: "Nhà thiết kế thời trang", code: "2163", riasec: ["A", "R"], salary: "12-45 triệu VNĐ", market: "QĐ 34: Nhóm thiết kế sản phẩm và may mặc." },
-        { name: "Giáo viên Tiếng Anh", code: "2353", riasec: ["S", "A"], salary: "15-45 triệu VNĐ", market: "Thị trường: Ưu tiên chứng chỉ IELTS/TESOL quốc tế." },
-        { name: "Chuyên viên Luật", code: "2611", riasec: ["I", "C"], salary: "15-55 triệu VNĐ", market: "Navigos: Nhu cầu cao trong M&A và tuân thủ doanh nghiệp." },
-        { name: "Doanh nhân / Founder", code: "1120", riasec: ["E", "A"], salary: "Vô hạn", market: "Startup: Hệ sinh thái khởi nghiệp Việt Nam năng động." },
-        { name: "Quản lý Khách sạn", code: "1411", riasec: ["E", "S"], salary: "25-70 triệu VNĐ", market: "Reeracoen: Phục hồi mạnh tại các thủ phủ du lịch." },
-        { name: "Nhà khoa học dữ liệu", code: "2120", riasec: ["I", "R"], salary: "35-100 triệu VNĐ", market: "Robert Walters: Kỹ năng cốt lõi của kỷ nguyên số." }
+        { name: "Giám đốc Công nghệ (CTO) / Kiến trúc sư trưởng", code: "2512", riasec: ["I", "R"], salary: "18-55 triệu VNĐ", market: "ITviec: Nhu cầu ổn định, ưu tiên Full-stack và Cloud." },
+        { name: "Trưởng phòng Phân tích dữ liệu chiến lược", code: "2511", riasec: ["I", "C"], salary: "15-45 triệu VNĐ", market: "Robert Walters: Tăng trưởng mạnh trong Tài chính và E-commerce." },
+        { name: "Giám đốc Trải nghiệm (CXO) / Giám đốc Nghệ thuật", code: "2166", riasec: ["A", "I"], salary: "15-40 triệu VNĐ", market: "Reeracoen: Cần kỹ năng nghiên cứu người dùng sâu." },
+        { name: "Giám đốc Quản lý Dự án & Vận hành IT", code: "2511", riasec: ["E", "C"], salary: "35-80 triệu VNĐ", market: "Robert Walters: Ưu tiên ứng viên có chứng chỉ PMP/Agile." },
+        { name: "Giám đốc Marketing số", code: "2431", riasec: ["E", "A"], salary: "12-35 triệu VNĐ", market: "LinkedIn: Xu hướng chuyển dịch sang Data-driven Marketing." },
+        { name: "Giám đốc Tài chính (CFO)", code: "2411", riasec: ["C", "E"], salary: "25-65 triệu VNĐ", market: "Adecco: Yêu cầu cao về tuân thủ và chứng chỉ quốc tế." },
+        { name: "Giám đốc Nhân sự (CHRO)", code: "2423", riasec: ["S", "E"], salary: "12-30 triệu VNĐ", market: "Manpower: Tập trung vào giữ chân nhân tài và văn hóa." },
+        { name: "Kiến trúc sư trưởng / Chủ trì thiết kế cấp cao", code: "2161", riasec: ["A", "R"], salary: "15-45 triệu VNĐ", market: "QĐ 34: Nhóm chuyên gia kỹ thuật bậc cao." },
+        { name: "Giám đốc Y khoa / Chuyên gia Tư vấn Cấp cao", code: "2211", riasec: ["I", "S"], salary: "25-100 triệu VNĐ", market: "Thị trường: Y tế tư nhân đang mở rộng mạnh mẽ." },
+        { name: "Đối tác Quản lý Tài sản Cấp cao (Wealth Manager)", code: "2412", riasec: ["E", "I"], salary: "20-120 triệu+ VNĐ", market: "Robert Walters: Thu nhập đột phá theo doanh số." },
+        { name: "Chuyên gia Tư vấn Chiến lược Sức khỏe Tinh thần", code: "2634", riasec: ["S", "I"], salary: "15-35 triệu VNĐ", market: "Xu hướng: Dịch vụ tham vấn học đường và doanh nghiệp." },
+        { name: "Trưởng phòng Kỹ thuật / Chuyên gia Tư vấn Công nghiệp", code: "2144", riasec: ["R", "I"], salary: "15-40 triệu VNĐ", market: "Reeracoen: Nhu cầu cao tại các KCN miền Bắc và Nam." },
+        { name: "Giám đốc Kiểm toán / Đối tác (Partner)", code: "2411", riasec: ["C", "I"], salary: "12-50 triệu VNĐ", market: "Big4: Lộ trình thăng tiến rõ ràng, áp lực cao." },
+        { name: "Giám đốc Truyền thông & Thương hiệu", code: "2432", riasec: ["E", "S"], salary: "15-40 triệu VNĐ", market: "VietnamWorks: Cần mạng lưới báo chí và KOLs rộng." },
+        { name: "Chuyên gia Nghiên cứu AI / Giám đốc Khoa học", code: "2512", riasec: ["I", "R"], salary: "45-130 triệu VNĐ", market: "ITviec: Cạnh tranh toàn cầu, cực kỳ khan hiếm." },
+        { name: "Giám đốc Chuỗi cung ứng (CSO)", code: "1324", riasec: ["C", "E"], salary: "35-90 triệu VNĐ", market: "Robert Walters: Vai trò chiến lược trong chuyển dịch FDI." },
+        { name: "Giám đốc Sáng tạo / Chủ sở hữu thương hiệu thời trang", code: "2163", riasec: ["A", "R"], salary: "12-45 triệu VNĐ", market: "QĐ 34: Nhóm thiết kế sản phẩm và may mặc." },
+        { name: "Chuyên gia Ngôn ngữ / Giám đốc Học thuật", code: "2353", riasec: ["S", "A"], salary: "15-45 triệu VNĐ", market: "Thị trường: Ưu tiên chứng chỉ IELTS/TESOL quốc tế." },
+        { name: "Giám đốc Pháp chế / Luật sư điều hành", code: "2611", riasec: ["I", "C"], salary: "15-55 triệu VNĐ", market: "Navigos: Nhu cầu cao trong M&A và tuân thủ doanh nghiệp." },
+        { name: "Chủ tịch Hội đồng Quản trị / Tổng Giám đốc (CEO)", code: "1120", riasec: ["E", "A"], salary: "Vô hạn", market: "Startup: Hệ sinh thái khởi nghiệp Việt Nam năng động." },
+        { name: "Giám đốc Điều hành Khách sạn / Khu nghỉ dưỡng", code: "1411", riasec: ["E", "S"], salary: "25-70 triệu VNĐ", market: "Reeracoen: Phục hồi mạnh tại các thủ phủ du lịch." },
+        { name: "Trưởng khoa học dữ liệu (Chief Data Scientist)", code: "2120", riasec: ["I", "R"], salary: "35-100 triệu VNĐ", market: "Robert Walters: Kỹ năng cốt lõi của kỷ nguyên số." }
     ];
 
     const reasons = {
-        "Very High": "Dựa trên RIASEC, bạn có sự tương đồng tuyệt đối với yêu cầu cốt lõi của nghề này.",
-        "High": "Sự kết hợp giữa đam mê và năng lực của bạn sẽ giúp bạn tỏa sáng nhanh chóng.",
-        "Medium": "Bạn có tiềm năng, nhưng cần bồi dưỡng thêm một số kỹ năng chuyên biệt.",
-        "Low": "Nghề này có thể mang lại góc nhìn mới, dù không phải thế mạnh tự nhiên của bạn.",
-        "Very Low": "Đòi hỏi sự nỗ lực vượt bậc để thích nghi với môi trường làm việc đặc thù."
+        "Very High": "Dựa trên RIASEC, đây là vị trí cao nhất và phù hợp tuyệt đối với tiềm năng của bạn.",
+        "High": "Vị trí này phản ánh sự giao thoa hoàn hảo giữa đam mê và năng lực đỉnh cao của bạn.",
+        "Medium": "Bạn có tiềm năng đạt tới vị trí này, nhưng cần bồi dưỡng thêm một số kỹ năng chuyên biệt.",
+        "Low": "Vị trí này có thể là một thử thách mới, giúp bạn mở rộng giới hạn bản thân.",
+        "Very Low": "Đòi hỏi sự nỗ lực vượt bậc để chinh phục vị trí đặc thù này."
     };
 
-    function calculateFit(career) {
+    function getRawScore(career) {
+        const sortedUserTraits = Object.entries(userRiasec).sort(([, a], [, b]) => b - a);
+        const topUserTrait = sortedUserTraits[0][0];
+        const secondUserTrait = sortedUserTraits[1][0];
+        const maxScore = sortedUserTraits[0][1];
+
         let score = 0;
         career.riasec.forEach((code, index) => {
             const weight = index === 0 ? 1.0 : 0.6;
             score += (userRiasec[code] || 0) * weight;
         });
-        const normalized = (score / 160) * 100;
-        if (normalized >= 85) return "Very High";
-        if (normalized >= 70) return "High";
-        if (normalized >= 50) return "Medium";
-        if (normalized >= 30) return "Low";
-        return "Very Low";
+
+        const possibleMax = maxScore * 1.6;
+        let normalized = possibleMax > 0 ? (score / possibleMax) * 100 : 0;
+
+        if (career.riasec[0] === topUserTrait) normalized += 15;
+        if (career.riasec[0] === secondUserTrait) normalized += 5;
+
+        return normalized;
     }
 
     function placeNodes() {
         if (!careerNodesContainer) return;
         careerNodesContainer.innerHTML = '';
 
-        const processedCareers = careerDatabase.map(c => ({ ...c, fit: calculateFit(c) }));
+        const processedCareers = careerDatabase
+            .map(c => ({ ...c, rawScore: getRawScore(c) }))
+            .sort((a, b) => b.rawScore - a.rawScore);
+
+        processedCareers.forEach((c, index) => {
+            const rankPct = (index / processedCareers.length) * 100;
+            if (rankPct < 20) c.fit = "Very High";
+            else if (rankPct < 40) c.fit = "High";
+            else if (rankPct < 60) c.fit = "Medium";
+            else if (rankPct < 80) c.fit = "Low";
+            else c.fit = "Very Low";
+        });
 
         const width = window.innerWidth;
         const height = window.innerHeight;
         const isMobile = width <= 768;
 
         const fitLevels = [
-            { level: "Very High", label: "Rất cao", r: 32 },
-            { level: "High", label: "Cao", r: 50 },
-            { level: "Medium", label: "Trung bình", r: 68 },
-            { level: "Low", label: "Thấp", r: 86 },
-            { level: "Very Low", label: "Rất thấp", r: 104 }
+            { level: "Very High", label: "Rất cao", r: 14, color: "#D3F9D8" }, 
+            { level: "High", label: "Cao", r: 24, color: "#D0EBFF" },      
+            { level: "Medium", label: "Trung bình", r: 34, color: "#FFDEEB" }, 
+            { level: "Low", label: "Thấp", r: 44, color: "#FFF3BF" },      
+            { level: "Very Low", label: "Rất thấp", r: 52, color: "#FFE8CC" } 
         ];
 
-        if (isMobile) { fitLevels.forEach(f => { f.r *= 0.8; }); }
+        if (isMobile) { 
+            fitLevels.forEach(f => { f.r *= 0.7; }); 
+        }
 
-        const placedNodes = [];
         const tabDetail = document.getElementById('tab-detail');
         const tabRoadmap = document.getElementById('tab-roadmap');
 
         const updateTabs = (careerName) => {
-            // Updated paths - flat structure
             if (tabDetail) tabDetail.setAttribute('href', `timeline.html?career=${encodeURIComponent(careerName)}`);
             if (tabRoadmap) tabRoadmap.setAttribute('href', `roadmap.html?career=${encodeURIComponent(careerName)}`);
         };
@@ -100,121 +118,131 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             document.querySelectorAll('.node-dot').forEach(d => d.classList.remove('selected'));
-            if (dotElement) {
-                dotElement.classList.add('selected');
-            } else {
-                const allWrappers = document.querySelectorAll('.career-node-wrapper');
-                allWrappers.forEach(w => {
-                    if (w.querySelector('.node-label')?.innerText.trim() === careerName.trim()) {
-                        w.querySelector('.node-dot').classList.add('selected');
-                    }
-                });
-            }
+            if (dotElement) dotElement.classList.add('selected');
         };
 
-        fitLevels.forEach((fitData) => {
+        // 1. Initialize nodes with target positions
+        const nodes = [];
+        fitLevels.forEach((fitData, tierIndex) => {
             const items = processedCareers.filter(c => c.fit === fitData.level);
             if (items.length === 0) return;
 
-            items.forEach((career) => {
-                let bestX = 50, bestY = 50, bestDir = 'node-right';
-                let maxMinDist = -1;
-                const labelWidthPx = career.name.length * 10 + 40;
+            const itemCount = items.length;
+            const tierRotation = (tierIndex * 45) * (Math.PI / 180);
 
-                for (let i = 0; i < 800; i++) {
-                    const angle = Math.random() * Math.PI * 2;
-                    const r = fitData.r;
-                    const rXPct = (r * height / width);
-                    const rYPct = r;
+            items.forEach((career, index) => {
+                const angle = tierRotation + (index / itemCount) * Math.PI * 2;
+                const r = fitData.r;
+                
+                // Target coordinates in percentages (0-100)
+                let targetX = 50 + (r * 1.3 * Math.cos(angle)); 
+                let targetY = 50 + (r * 1.0 * Math.sin(angle)); 
 
-                    let xPct = 50 + (rXPct * Math.cos(angle));
-                    let yPct = 50 + (rYPct * Math.sin(angle));
+                nodes.push({
+                    career, fitData,
+                    targetX, targetY,
+                    x: targetX, y: targetY,
+                    vx: 0, vy: 0
+                });
+            });
+        });
 
-                    const dx = xPct - 50;
-                    const dy = yPct - 50;
+        // 2. Physics Simulation to separate overlapping nodes
+        const ITERATIONS = 150;
+        const MIN_DX = 7; // Min horizontal clearance %
+        const MIN_DY = 9; // Min vertical clearance % (larger because labels hang down)
 
-                    let dir = '';
-                    if (isMobile) {
-                        dir = dy < 0 ? 'node-top' : 'node-bottom';
-                    } else {
-                        if (Math.abs(dy) > Math.abs(dx) * 1.1) {
-                            dir = dy < 0 ? 'node-top' : 'node-bottom';
-                        } else {
-                            dir = dx < 0 ? 'node-left' : 'node-right';
-                        }
-                    }
-
-                    const labelWPct = (labelWidthPx / width) * 100;
-                    let lMargin = 10, rMargin = 12, tMargin = 18, bMargin = 8;
-                    if (dir === 'node-left') lMargin = labelWPct + 2;
-                    if (dir === 'node-right') rMargin = labelWPct + 2;
-
-                    if (xPct < lMargin) xPct = lMargin;
-                    if (xPct > (100 - rMargin)) xPct = 100 - rMargin;
-                    if (yPct < tMargin) yPct = tMargin;
-                    if (yPct > (100 - bMargin)) yPct = 100 - bMargin;
-
-                    const px = (xPct / 100) * width;
-                    const py = (yPct / 100) * height;
-
-                    let minDist = 999999;
-                    for (let placed of placedNodes) {
-                        const adx = Math.abs(placed.px - px);
-                        const ady = Math.abs(placed.py - py);
-                        const score = Math.max(adx / 3.8, ady);
-                        if (score < minDist) minDist = score;
-                    }
-
-                    if (placedNodes.length === 0 || minDist > maxMinDist) {
-                        maxMinDist = minDist;
-                        bestX = xPct;
-                        bestY = yPct;
-                        bestDir = dir;
-                        if (maxMinDist > 160) break;
+        for (let i = 0; i < ITERATIONS; i++) {
+            // Apply repulsion between nodes
+            for (let j = 0; j < nodes.length; j++) {
+                for (let k = j + 1; k < nodes.length; k++) {
+                    const n1 = nodes[j];
+                    const n2 = nodes[k];
+                    
+                    const dx = n2.x - n1.x;
+                    const dy = n2.y - n1.y;
+                    
+                    if (Math.abs(dx) < MIN_DX && Math.abs(dy) < MIN_DY) {
+                        // Nodes overlap! Calculate push force
+                        const pushX = (MIN_DX - Math.abs(dx)) * Math.sign(dx || 1) * 0.1;
+                        const pushY = (MIN_DY - Math.abs(dy)) * Math.sign(dy || 1) * 0.1;
+                        
+                        n1.vx -= pushX;
+                        n1.vy -= pushY;
+                        n2.vx += pushX;
+                        n2.vy += pushY;
                     }
                 }
+            }
 
-                placedNodes.push({ px: (bestX / 100) * width, py: (bestY / 100) * height });
+            // Apply attraction and update positions
+            nodes.forEach(n => {
+                // Gently pull back to intended orbit target
+                n.vx += (n.targetX - n.x) * 0.02;
+                n.vy += (n.targetY - n.y) * 0.02;
 
-                const wrapper = document.createElement('div');
-                wrapper.className = 'node-wrapper';
-                wrapper.style.left = `${bestX}%`;
-                wrapper.style.top = `${bestY}%`;
+                n.x += n.vx;
+                n.y += n.vy;
 
-                const fitClass = fitData.level.toLowerCase().replace(' ', '-');
-                const isFlipped = bestY < 40; // Flip tooltip to bottom if node is in top 40% of screen
+                // Dampen velocity to stabilize
+                n.vx *= 0.8;
+                n.vy *= 0.8;
 
-                wrapper.innerHTML = `
-                    <div class="node-animator" style="animation: float ${8 + Math.random() * 6}s ease-in-out infinite;">
-                        <div class="career-node ${bestDir}">
-                            <div class="node-dot ${fitClass}"></div>
-                            <div class="node-label">${career.name}</div>
-                            <div class="node-tooltip ${isFlipped ? 'flipped' : ''}">
-                                <div class="tooltip-header">
-                                    <span class="tooltip-fit ${fitClass}">Phù hợp: ${fitData.label}</span>
-                                    <span class="tooltip-code">Mã QĐ34: ${career.code}</span>
-                                </div>
-                                <p class="tooltip-desc"><strong>Thị trường:</strong> ${career.market}</p>
-                                <p class="tooltip-salary"><strong>Lương TB:</strong> ${career.salary}</p>
-                                <p class="tooltip-reason"><em>${reasons[fitData.level]}</em></p>
-                                <button class="tooltip-btn" data-career="${career.name}">Xem chi tiết</button>
+                // Keep strictly away from the Central Hub (approx 12% radius)
+                const distToCenter = Math.sqrt((n.x-50)**2 + (n.y-50)**2);
+                if (distToCenter < 14) {
+                    const push = (14 - distToCenter) / distToCenter;
+                    n.x += (n.x - 50) * push * 0.5;
+                    n.y += (n.y - 50) * push * 0.5;
+                }
+
+                // Keep strictly within screen bounds
+                // Increased the top boundary (y) from 8 to 18 to prevent hiding under navigation tabs
+                n.x = Math.max(5, Math.min(95, n.x));
+                n.y = Math.max(18, Math.min(92, n.y));
+            });
+        }
+
+        // 3. Render final settled nodes
+        nodes.forEach(n => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'node-wrapper';
+            wrapper.style.left = `${n.x}%`;
+            wrapper.style.top = `${n.y}%`;
+
+            const fitClass = n.fitData.level.toLowerCase().replace(' ', '-');
+            const isFlipped = n.y < 40; 
+
+            wrapper.innerHTML = `
+                <div class="node-animator" style="animation: float ${10 + Math.random() * 8}s ease-in-out infinite;">
+                    <div class="career-node">
+                        <div class="node-dot ${fitClass}" style="background-color: ${n.fitData.color}; border: 1.5px solid #000;"></div>
+                        <div class="node-label">${n.career.name}</div>
+                        <div class="node-tooltip ${isFlipped ? 'flipped' : ''}">
+                            <div class="tooltip-header">
+                                <span class="tooltip-fit ${fitClass}">Phù hợp: ${n.fitData.label}</span>
+                                <span class="tooltip-code">Mã QĐ34: ${n.career.code}</span>
                             </div>
+                            <p class="tooltip-desc"><strong>Thị trường:</strong> ${n.career.market}</p>
+                            <p class="tooltip-salary"><strong>Lương TB:</strong> ${n.career.salary}</p>
+                            <p class="tooltip-reason"><em>${reasons[n.fitData.level]}</em></p>
+                            <button class="tooltip-btn" data-career="${n.career.name}">Xem chi tiết</button>
                         </div>
                     </div>
-                `;
-                careerNodesContainer.appendChild(wrapper);
+                </div>
+            `;
+            careerNodesContainer.appendChild(wrapper);
 
-                const nodeBtn = wrapper.querySelector('.tooltip-btn');
-                nodeBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const careerName = nodeBtn.getAttribute('data-career');
-                    selectCareer(careerName, wrapper.querySelector('.node-dot'), fitData.label);
-                    location.href = `timeline.html?career=${encodeURIComponent(careerName)}`;
-                });
+            const nodeBtn = wrapper.querySelector('.tooltip-btn');
+            nodeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const careerName = nodeBtn.getAttribute('data-career');
+                selectCareer(careerName, wrapper.querySelector('.node-dot'), n.fitData.label);
+                location.href = `timeline.html?career=${encodeURIComponent(careerName)}`;
+            });
 
-                wrapper.querySelector('.node-dot').addEventListener('click', () => {
-                    selectCareer(career.name, wrapper.querySelector('.node-dot'), fitData.label);
-                });
+            wrapper.querySelector('.node-dot').addEventListener('click', () => {
+                selectCareer(n.career.name, wrapper.querySelector('.node-dot'), n.fitData.label);
             });
         });
 

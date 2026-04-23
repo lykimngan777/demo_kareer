@@ -6,13 +6,25 @@
     <title>Lộ trình phát triển | Kareer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: Arial, Helvetica, sans-serif !important; }
+    </style>
     <link rel="stylesheet" href="step3.css">
     <style>
+        :root {
+            --font-main: Arial, Helvetica, sans-serif;
+            --font-heading: Arial, Helvetica, sans-serif;
+        }
+
         body {
             overflow-y: auto !important;
             overflow-x: hidden !important;
             background: #fdfdfd;
+            font-family: Arial, sans-serif;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
         }
 
         .roadmap-view {
@@ -92,12 +104,12 @@
 
         .select-group select {
             width: 100%;
-            padding: 1.2rem;
+            padding: 1.2rem 3rem 1.2rem 1.5rem;
             border-radius: 12px;
             border: 3px solid #000;
             font-size: 1.1rem;
             font-weight: 700;
-            background: #fff;
+            background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 1.5rem center;
             box-shadow: 6px 6px 0px #000;
             cursor: pointer;
             appearance: none;
@@ -293,19 +305,86 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* ─── TAB NAVIGATION (STANDARDIZED) ─── */
+        .tab-container {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 100px;
+            width: fit-content;
+            z-index: 2000;
+            box-shadow: 8px 8px 0px #000;
+        }
+
+        .tab-item {
+            padding: 0.7rem 1.8rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #000;
+            background: transparent;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tab-item:hover {
+            background: #f0f0f0;
+        }
+
+        .tab-item.active {
+            background: #000;
+            color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .tab-container {
+                top: 1rem;
+                width: 95%;
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding: 0.4rem;
+                border-radius: 20px;
+            }
+            .tab-item {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body>
+    <header class="main-header" style="position: absolute; top: 1.5rem; left: 2rem; z-index: 100;">
+        <a href="index.html">
+            <img src="KAREER.png" alt="Kareer Logo" class="main-logo">
+        </a>
+    </header>
+
     <div class="tab-container">
-        <a href="step3.html" class="tab-item">Mở lối sự nghiệp</a>
+        <a href="step2.html" class="tab-item">Kết quả phân tích</a>
+        <a href="step3.html" class="tab-item">Định hướng</a>
         <a href="timeline.html" class="tab-item">Chi tiết nghề nghiệp</a>
         <a href="roadmap.html" class="tab-item active">Lộ trình phát triển</a>
     </div>
 
     <div class="roadmap-view">
-        <a href="step3.html" class="back-btn"><span>← Quay lại</span></a>
+        <header class="roadmap-header">
+            <h1 id="roadmap-main-title">Lộ trình Phát triển</h1>
 
-
+        </header>
 
         <div class="filter-box">
             <div class="select-group">
@@ -324,30 +403,60 @@
 
     <script>
         const careerList = [
-            "Kỹ sư phần mềm", "Chuyên viên Phân tích dữ liệu", "Nhà thiết kế UX/UI", 
-            "Quản lý Dự án IT", "Chuyên viên Marketing số", "Kế toán trưởng", 
-            "Chuyên viên Nhân sự", "Kiến trúc sư", "Bác sĩ Đa khoa", 
-            "Chuyên viên Tư vấn Tài chính", "Nhà tâm lý học", "Kỹ sư Cơ khí", 
-            "Kiểm toán viên", "Chuyên viên PR & Truyền thông", "Lập trình viên AI/ML", 
-            "Quản lý Chuỗi cung ứng", "Nhà thiết kế thời trang", "Giáo viên Tiếng Anh", 
-            "Chuyên viên Luật", "Doanh nhân / Founder", "Quản lý Khách sạn", 
-            "Nhà khoa học dữ liệu"
-        ];
-
-        // Future Skills from WEF 2025
-        const wefSkills = [
-            { name: "Tư duy AI & Machine Learning", type: "future" },
-            { name: "Phân tích dữ liệu & Trực quan hóa", type: "future" },
-            { name: "Kỹ năng số (Digital Literacy)", type: "future" },
-            { name: "Tư duy phản biện & Phân tích", type: "future" },
-            { name: "Sáng tạo & Sáng kiến", type: "future" }
+            "Giám đốc Công nghệ (CTO) / Kiến trúc sư trưởng",
+            "Trưởng phòng Phân tích dữ liệu chiến lược",
+            "Giám đốc Trải nghiệm (CXO) / Giám đốc Nghệ thuật",
+            "Giám đốc Quản lý Dự án & Vận hành IT",
+            "Giám đốc Marketing số",
+            "Giám đốc Tài chính (CFO)",
+            "Giám đốc Nhân sự (CHRO)",
+            "Kiến trúc sư trưởng / Chủ trì thiết kế cấp cao",
+            "Giám đốc Y khoa / Chuyên gia Tư vấn Cấp cao",
+            "Đối tác Quản lý Tài sản Cấp cao (Wealth Manager)",
+            "Chuyên gia Tư vấn Chiến lược Sức khỏe Tinh thần",
+            "Trưởng phòng Kỹ thuật / Chuyên gia Tư vấn Công nghiệp",
+            "Giám đốc Kiểm toán / Đối tác (Partner)",
+            "Giám đốc Truyền thông & Thương hiệu",
+            "Chuyên gia Nghiên cứu AI / Giám đốc Khoa học",
+            "Giám đốc Chuỗi cung ứng (CSO)",
+            "Giám đốc Sáng tạo / Chủ sở hữu thương hiệu thời trang",
+            "Chuyên gia Ngôn ngữ / Giám đốc Học thuật",
+            "Giám đốc Pháp chế / Luật sư điều hành",
+            "Chủ tịch Hội đồng Quản trị / Tổng Giám đốc (CEO)",
+            "Giám đốc Điều hành Khách sạn / Khu nghỉ dưỡng",
+            "Trưởng khoa học dữ liệu (Chief Data Scientist)"
         ];
 
         const roleCategories = {
-            tech: ["Kỹ sư phần mềm", "Lập trình viên AI/ML", "Nhà khoa học dữ liệu", "Kỹ sư Cơ khí", "Quản lý Dự án IT", "Chuyên viên Phân tích dữ liệu"],
-            creative: ["Nhà thiết kế UX/UI", "Nhà thiết kế thời trang", "Kiến trúc sư", "Chuyên viên PR & Truyền thông"],
-            business: ["Chuyên viên Marketing số", "Kế toán trưởng", "Kiểm toán viên", "Quản lý Chuỗi cung ứng", "Chuyên viên Tư vấn Tài chính", "Quản lý Khách sạn", "Doanh nhân / Founder"],
-            social: ["Chuyên viên Nhân sự", "Bác sĩ Đa khoa", "Nhà tâm lý học", "Giáo viên Tiếng Anh", "Chuyên viên Luật"]
+            tech: [
+                "Giám đốc Công nghệ (CTO) / Kiến trúc sư trưởng",
+                "Trưởng phòng Phân tích dữ liệu chiến lược",
+                "Giám đốc Quản lý Dự án & Vận hành IT",
+                "Chuyên gia Nghiên cứu AI / Giám đốc Khoa học",
+                "Trưởng khoa học dữ liệu (Chief Data Scientist)"
+            ],
+            creative: [
+                "Giám đốc Trải nghiệm (CXO) / Giám đốc Nghệ thuật",
+                "Kiến trúc sư trưởng / Chủ trì thiết kế cấp cao",
+                "Giám đốc Sáng tạo / Chủ sở hữu thương hiệu thời trang"
+            ],
+            business: [
+                "Giám đốc Marketing số",
+                "Giám đốc Tài chính (CFO)",
+                "Đối tác Quản lý Tài sản Cấp cao (Wealth Manager)",
+                "Giám đốc Kiểm toán / Đối tác (Partner)",
+                "Giám đốc Truyền thông & Thương hiệu",
+                "Giám đốc Chuỗi cung ứng (CSO)",
+                "Chủ tịch Hội đồng Quản trị / Tổng Giám đốc (CEO)",
+                "Giám đốc Điều hành Khách sạn / Khu nghỉ dưỡng"
+            ],
+            social: [
+                "Giám đốc Nhân sự (CHRO)",
+                "Giám đốc Y khoa / Chuyên gia Tư vấn Cấp cao",
+                "Chuyên gia Tư vấn Chiến lược Sức khỏe Tinh thần",
+                "Chuyên gia Ngôn ngữ / Giám đốc Học thuật",
+                "Giám đốc Pháp chế / Luật sư điều hành"
+            ]
         };
 
         const categorySkills = {
@@ -356,6 +465,14 @@
             business: ["Quản trị dự án", "Phân tích thị trường", "Kỹ năng đàm phán", "Quản trị rủi ro", "Tư duy chiến lược"],
             social: ["Kỹ năng tham vấn", "Giao tiếp liên nhân", "Quản trị nhân sự", "Pháp luật & Đạo đức", "Thấu cảm & Hỗ trợ"]
         };
+
+        const wefSkills = [
+            { name: "Tư duy AI & Machine Learning", type: "future" },
+            { name: "Phân tích dữ liệu & Trực quan hóa", type: "future" },
+            { name: "Kỹ năng số (Digital Literacy)", type: "future" },
+            { name: "Tư duy phản biện & Phân tích", type: "future" },
+            { name: "Sáng tạo & Sáng kiến", type: "future" }
+        ];
 
         const categoryCourses = {
             tech: [
@@ -386,6 +503,9 @@
             const skills = categorySkills[category];
             const courses = categoryCourses[category];
 
+            // Extract the core domain if it's a "Giám đốc" title
+            let coreDomain = targetRole.replace("Giám đốc ", "").replace("Trưởng phòng ", "").split(" (")[0].split(" /")[0];
+
             return [
                 { 
                     stage: "BẮT ĐẦU (Tận dụng Base)", 
@@ -398,7 +518,7 @@
                 },
                 { 
                     stage: "CHUYỂN TIẾP", 
-                    role: `Chuyên viên ${targetRole} (Mới vào nghề)`, 
+                    role: `Chuyên viên ${coreDomain} (Cấp độ 1)`, 
                     skills: [skills[0], skills[1], "Critical Thinking"], 
                     courses: [
                         courses[1], 
@@ -407,7 +527,7 @@
                 },
                 { 
                     stage: "PHÁT TRIỂN", 
-                    role: `${targetRole} (Chuyên sâu)`, 
+                    role: `Quản lý / Chuyên gia ${coreDomain} (Cấp độ 2)`, 
                     skills: [skills[2], skills[3], "Data-Driven Decisions"], 
                     courses: [
                         courses[2], 
@@ -415,8 +535,8 @@
                     ] 
                 },
                 { 
-                    stage: "MỤC TIÊU", 
-                    role: `Chuyên gia / Quản lý ${targetRole}`, 
+                    stage: "MỤC TIÊU CAO NHẤT", 
+                    role: targetRole, 
                     skills: [skills[4], "Tầm nhìn chiến lược", "Strategic AI Mastery"], 
                     courses: [
                         { n: "Executive Leadership Program", p: "Coursera", url: "https://www.coursera.org/specializations/executive-leadership" }, 
@@ -440,9 +560,18 @@
             const flow = document.getElementById('timeline-flow');
             const targetRole = document.getElementById('role-filter').value;
             const profile = JSON.parse(localStorage.getItem('kareer_profile') || '{}');
+            const basePos = profile.position || "Người mới bắt đầu";
             
             // Save selection
             localStorage.setItem('selectedCareer', targetRole);
+
+            // Update Header
+            const headerTitle = document.getElementById('roadmap-main-title');
+            const headerSubtitle = document.getElementById('roadmap-subtitle');
+            if (headerTitle) {
+                headerTitle.innerHTML = `Lộ trình chinh phục <span>${targetRole}</span>`;
+
+            }
 
             const path = generateCustomPath(targetRole, profile);
             

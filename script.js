@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let isSkipped = false;
 
         function finishSequence() {
-            if (currentIndex >= characters.length && !isSkipped) return;
+            if (isSkipped) return;
             
             clearTimeout(typingTimeout);
             isSkipped = true;

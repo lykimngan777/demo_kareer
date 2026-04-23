@@ -10,9 +10,6 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
-    rel="stylesheet">
   <style>
     *,
     *::before,
@@ -22,9 +19,13 @@
       padding: 0;
     }
 
+    * {
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+
     :root {
-      --font-main: 'Inter', sans-serif;
-      --font-heading: 'Be Vietnam Pro', sans-serif;
+      --font-main: Arial, Helvetica, sans-serif;
+      --font-heading: Arial, Helvetica, sans-serif;
       --bg-color: #f2f2f2;
       --bg-white: #ffffff;
       --text-black: #111111;
@@ -59,7 +60,7 @@
     }
 
     .main-logo {
-      height: 72px;
+      height: 80px;
       width: auto;
       display: block;
       transition: var(--transition);
@@ -73,7 +74,7 @@
       }
 
       .main-logo {
-        height: 48px;
+        height: 60px;
       }
     }
 
@@ -88,9 +89,75 @@
       padding: 20px;
     }
 
+    .card * {
+      font-family: Arial, Helvetica, sans-serif !important;
+    }
+
+    /* ─── TAB NAVIGATION (STANDARDIZED) ─── */
+    .tab-container {
+        position: fixed;
+        top: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none; /* Hidden by default */
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        background: #fff;
+        border: 2px solid #000;
+        border-radius: 100px;
+        width: fit-content;
+        z-index: 2000;
+        box-shadow: 8px 8px 0px #000;
+    }
+
+    .tab-item {
+        padding: 0.7rem 1.8rem;
+        border-radius: 100px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 700;
+        font-family: Arial, sans-serif;
+        color: #000;
+        background: transparent;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tab-item:hover {
+        background: #f0f0f0;
+    }
+
+    .tab-item.active {
+        background: #000;
+        color: #fff;
+    }
+
+    @media (max-width: 768px) {
+        .tab-container {
+            top: 1rem;
+            width: 95%;
+            overflow-x: auto;
+            justify-content: flex-start;
+            padding: 0.4rem;
+            border-radius: 20px;
+        }
+        .tab-item {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.75rem;
+        }
+    }
+
+
+
     .quiz-container {
       max-width: 1200px;
-      margin: 60px auto;
+      margin: 120px auto 60px;
       width: 100%;
       padding: 0 30px;
     }
@@ -226,6 +293,7 @@
     .result-hdr {
       text-align: center;
       margin-bottom: 40px;
+      padding-top: 40px;
     }
 
     .result-title {
@@ -290,6 +358,7 @@
       text-transform: uppercase;
       border-bottom: 3px solid var(--text-black);
       padding-bottom: 15px;
+      font-family: Arial, sans-serif;
     }
 
     .theory-section {
@@ -307,6 +376,7 @@
       margin-bottom: 20px;
       border-bottom: 1.5px dashed #ccc;
       padding-bottom: 10px;
+      font-family: Arial, sans-serif;
     }
 
     .dim-item {
@@ -514,9 +584,16 @@
   <div class="shell">
     <header class="main-header">
       <a href="index.html">
-        <img src="Kareer (2).png" alt="Kareer Logo" class="main-logo">
+        <img src="KAREER.png" alt="Kareer Logo" class="main-logo">
       </a>
     </header>
+
+    <div class="tab-container" id="main-nav-tabs">
+        <a href="step2.html" class="tab-item active">Kết quả phân tích</a>
+        <a href="step3.html" class="tab-item">Định hướng</a>
+        <a href="timeline.html" class="tab-item">Chi tiết nghề nghiệp</a>
+        <a href="roadmap.html" class="tab-item">Lộ trình phát triển</a>
+    </div>
 
     <div class="progress-shell" id="progressShell">
       <div class="progress-fill" id="progressFill"></div>
@@ -638,12 +715,36 @@
     };
 
     const conclusionData = {
-      realistic: { conclusion: "Bạn là người thực tế, hành động và có khả năng vận hành tuyệt vời.", suitable: ["Kỹ sư vận hành", "Chuyên gia kỹ thuật"], unsuitable: ["Quan hệ công chúng", "Nghệ thuật trình diễn"] },
-      investigative: { conclusion: "Bạn có trí tuệ sắc bén và khả năng phân tích vấn đề chuyên sâu.", suitable: ["Nhà phân tích dữ liệu", "Nghiên cứu viên"], unsuitable: ["Bán hàng trực tiếp", "Quản trị sự kiện"] },
-      artistic: { conclusion: "Bạn sở hữu tâm hồn nghệ sĩ và khả năng sáng tạo không giới hạn.", suitable: ["Thiết kế đồ họa", "Sáng tạo nội dung"], unsuitable: ["Kế toán/Kiểm toán", "Vận hành quy chuẩn"] },
-      social: { conclusion: "Bạn là trái tim của tập thể với khả năng thấu cảm và kết nối.", suitable: ["Tư vấn tâm lý", "Quản trị nhân sự"], unsuitable: ["Lập trình viên độc lập", "Kỹ thuật máy móc"] },
-      enterprising: { conclusion: "Bạn là nhà lãnh đạo bẩm sinh với khả năng thuyết phục mạnh mẽ.", suitable: ["Quản trị kinh doanh", "Khởi nghiệp"], unsuitable: ["Lưu trữ hồ sơ", "Nghiên cứu lý thuyết"] },
-      conventional: { conclusion: "Bạn là người kiến tạo sự ổn định và chính xác trong mọi hệ thống.", suitable: ["Chuyên gia tài chính", "Quản lý quy trình"], unsuitable: ["Nghệ thuật tự do", "Khám phá mạo hiểm"] }
+      realistic: { 
+        conclusion: "Bạn là người của hành động, thực tiễn và sự bền bỉ. Bản sắc nghề nghiệp của bạn gắn liền với khả năng làm việc với các công cụ, máy móc và tạo ra những kết quả hữu hình. Bạn tin vào logic của đôi bàn tay và sự chính xác của quy trình kỹ thuật.", 
+        suitable: ["Công việc kỹ thuật, vận hành máy móc", "Môi trường làm việc ngoài trời hoặc thực địa", "Các lĩnh vực liên quan đến xây dựng, sản xuất hoặc nông nghiệp", "Môi trường đề cao tính thực tế và kết quả đo lường được"], 
+        unsuitable: ["Công việc trừu tượng, thiếu tính thực tiễn", "Môi trường làm việc quá thiên về lý thuyết hoặc thủ tục hành chính", "Các lĩnh vực đòi hỏi sự tinh tế cao trong giao tiếp xã hội", "Môi trường thiếu đi sự vận động và tương tác vật lý"] 
+      },
+      investigative: { 
+        conclusion: "Bạn là người thám hiểm kiến thức với tư duy phân tích sắc bén. Bản sắc nghề nghiệp của bạn được xây dựng trên sự tò mò, khao khát tìm lời giải cho những câu hỏi hóc búa và niềm đam mê nghiên cứu chuyên sâu. Bạn tin vào bằng chứng khoa học và sức mạnh của trí tuệ.", 
+        suitable: ["Công việc nghiên cứu, phân tích dữ liệu", "Môi trường làm việc độc lập và mang tính học thuật", "Các lĩnh vực liên quan đến khoa học, công nghệ hoặc y tế chuyên sâu", "Môi trường tôn trọng tư duy phản biện và sự logic"], 
+        unsuitable: ["Công việc lặp đi lặp lại, thiếu tính thử thách trí tuệ", "Môi trường làm việc quá coi trọng các mối quan hệ xã hội hơn hiệu quả chuyên môn", "Các công việc yêu cầu đưa ra quyết định dựa trên cảm tính", "Môi trường thiếu tài nguyên thông tin và dữ liệu"] 
+      },
+      artistic: { 
+        conclusion: "Bạn là người kiến tạo cảm hứng với tâm hồn tự do và đầy màu sắc. Bản sắc nghề nghiệp của bạn được xây dựng trên sự trực giác, trí tưởng tượng phong phú và nhu cầu mãnh liệt được thể hiện cái tôi cá nhân. Bạn tin vào cái đẹp và sức mạnh của sự đổi mới.", 
+        suitable: ["Công việc sáng tạo, thiết kế và nghệ thuật", "Môi trường làm việc linh hoạt, không gò bó", "Các lĩnh vực liên quan đến truyền thông, marketing hoặc giải trí", "Môi trường khuyến khích sự khác biệt và những ý tưởng đột phá"], 
+        unsuitable: ["Công việc rập khuôn, tuân thủ nghiêm ngặt các quy tắc", "Môi trường làm việc quá cứng nhắc về giờ giấc và quy trình", "Các công việc thiếu đi sự tự do trong suy nghĩ và hành động", "Môi trường coi thường giá trị thẩm mỹ và sự cảm nhận cá nhân"] 
+      },
+      social: { 
+        conclusion: "Trái tim bạn luôn hướng về giá trị con người. Bản sắc nghề nghiệp của bạn được xây dựng trên sự thấu cảm, lòng trắc ẩn và khả năng kết nối tuyệt vời. Bạn là chất keo gắn kết mọi tổ chức, người luôn lắng nghe và tìm cách nâng đỡ người khác. Hạnh phúc của bạn gắn liền với sự tiến bộ và hạnh phúc của cộng đồng xung quanh.", 
+        suitable: ["Công việc tương tác trực tiếp và hỗ trợ con người", "Môi trường làm việc mang tính hợp tác và chia sẻ", "Các lĩnh vực liên quan đến giáo dục, tâm lý, y tế hoặc cộng đồng", "Môi trường đề cao các giá trị đạo đức và nhân văn"], 
+        unsuitable: ["Làm việc hoàn toàn độc lập hoặc chỉ tương tác với máy móc", "Môi trường cạnh tranh gay gắt, đặt lợi nhuận trên con người", "Công việc thiếu đi sự tương tác xã hội và ý nghĩa nhân văn", "Môi trường làm việc lạnh lùng và thiếu sự đồng cảm"] 
+      },
+      enterprising: { 
+        conclusion: "Bạn là nhà lãnh đạo đầy năng lượng với khả năng thuyết phục bẩm sinh. Bản sắc nghề nghiệp của bạn được xây dựng trên sự quyết đoán, tham vọng và tầm nhìn chiến lược. Bạn là người dẫn dắt, luôn khao khát đạt được thành tựu và tạo ra tầm ảnh hưởng rộng lớn.", 
+        suitable: ["Công việc quản trị, kinh doanh và lãnh đạo", "Môi trường làm việc mang tính cạnh tranh và năng động", "Các lĩnh vực liên quan đến bán hàng, chính trị hoặc khởi nghiệp", "Môi trường đề cao kết quả, quyền lực và sự công nhận"], 
+        unsuitable: ["Công việc mang tính hỗ trợ âm thầm, thiếu sự nổi bật", "Môi trường làm việc quá chậm chạp và thiếu tính chiến đấu", "Các công việc yêu cầu sự kiên nhẫn tỉ mỉ với dữ liệu khô khan", "Môi trường thiếu đi cơ hội thăng tiến và khẳng định bản thân"] 
+      },
+      conventional: { 
+        conclusion: "Bạn là kiến trúc sư của sự ổn định, chính xác và trật tự. Bản sắc nghề nghiệp của bạn được xây dựng trên sự cẩn trọng, khả năng tổ chức tuyệt vời và tinh thần trách nhiệm cao. Bạn là người đảm bảo cho mọi hệ thống vận hành trơn tru và hiệu quả nhất.", 
+        suitable: ["Công việc quản lý dữ liệu, tài chính và nghiệp vụ", "Môi trường làm việc có cấu trúc rõ ràng và kỷ luật", "Các lĩnh vực liên quan đến kế toán, hành chính hoặc quản trị quy trình", "Môi trường tôn trọng sự chuẩn mực và tính minh bạch"], 
+        unsuitable: ["Công việc thiếu tính tổ chức, lộn xộn và không rõ ràng", "Môi trường làm việc quá biến động và thiếu quy chuẩn", "Các công việc yêu cầu sự sáng tạo ngẫu hứng và mạo hiểm", "Môi trường coi nhẹ các quy định và tính kỷ luật"] 
+      }
     };
 
     function renderPage() {
@@ -814,24 +915,23 @@
             
             <div class="rec-grid">
               <div class="rec-item rec-suitable">
-                <div class="rec-title" style="color: #2e7d32;"><span>✅ Phù hợp nhất với</span></div>
+                <div class="rec-title" style="color: #2e7d32;"><span>✅ PHÙ HỢP NHẤT VỚI</span></div>
                 <ul class="insight-list">
-                  ${conclusionData[top].suitable.map(it => `<li style="color: #2e7d32;">${it}</li>`).join('')}
+                  ${conclusionData[top].suitable.map(it => `<li style="color: #333;">${it}</li>`).join('')}
                 </ul>
               </div>
               <div class="rec-item rec-unsuitable">
-                <div class="rec-title" style="color: #c62828;"><span>❌ Không phù hợp với</span></div>
+                <div class="rec-title" style="color: #c62828;"><span>❌ KHÔNG PHÙ HỢP VỚI</span></div>
                 <ul class="insight-list">
-                  ${conclusionData[top].unsuitable.map(it => `<li style="color: #c62828;">${it}</li>`).join('')}
+                  ${conclusionData[top].unsuitable.map(it => `<li style="color: #333;">${it}</li>`).join('')}
                 </ul>
               </div>
             </div>
           </div>
 
-          <div class="result-actions" style="display: flex; gap: 15px; justify-content: center; margin-top: 40px;">
-            <button class="btn btn-ghost" onclick="window.location.href='index.html'">Trang chủ</button>
-            <button class="btn btn-primary" style="background: #111; color: white;" onclick="window.location.href='step3.html'">Khám phá ma trận nghề nghiệp</button>
+          <div class="result-actions" style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; width: 100%;">
             <button class="btn btn-ghost" onclick="retakeTest()">Làm lại</button>
+            <button class="btn btn-primary" style="background: #111; color: white;" onclick="window.location.href='step3.html'">Khám phá ma trận nghề nghiệp</button>
           </div>
         `;
 
@@ -840,6 +940,19 @@
         document.getElementById('quizFooter').style.display = 'none';
         document.getElementById('progressShell').style.display = 'none';
         document.getElementById('resultScreen').style.display = 'block';
+        
+        // Show navigation tabs
+        const navTabs = document.getElementById('main-nav-tabs');
+        if (navTabs) {
+            navTabs.style.display = 'flex';
+        }
+        
+        // Adjust container margin for tabs
+        const quizContainer = document.querySelector('.quiz-container');
+        if (quizContainer) {
+            quizContainer.style.marginTop = '160px';
+        }
+
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) { console.error(err); showToast("Có lỗi xảy ra. Vui lòng thử lại."); }
     }

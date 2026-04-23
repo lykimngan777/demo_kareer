@@ -6,23 +6,25 @@
     <title>Chi tiết nghề nghiệp | Kareer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: Arial, Helvetica, sans-serif !important; }
+    </style>
     <link rel="stylesheet" href="step3.css">
     <style>
+        :root {
+            --font-main: Arial, Helvetica, sans-serif;
+            --font-heading: Arial, Helvetica, sans-serif;
+        }
+
         body {
             overflow-y: auto !important;
             overflow-x: hidden !important;
             background: #fdfdfd;
+            font-family: Arial, sans-serif;
         }
 
-        .timeline-view {
-            min-height: 100vh;
-            padding: 8rem 2rem 6rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
+        button, input, select, textarea {
+            font-family: inherit;
         }
 
         .timeline-header {
@@ -32,136 +34,202 @@
         }
 
         .timeline-header h1 {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 3.2rem;
+            margin-bottom: 0.8rem;
             color: #111;
             font-weight: 900;
         }
 
         .timeline-header p {
-            font-family: var(--font-main);
             color: #666;
             font-size: 1.1rem;
             max-width: 600px;
+            margin: 0 auto;
         }
 
-        .back-btn {
+        .tab-container {
             position: fixed;
             top: 2rem;
-            left: 2rem;
-            padding: 0.8rem 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 100px;
+            width: fit-content;
+            z-index: 2000;
+            box-shadow: 8px 8px 0px #000;
+        }
+
+        .tab-item {
+            padding: 0.7rem 1.8rem;
+            border-radius: 100px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-family: Arial, sans-serif;
+            color: #000;
+            background: transparent;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .tab-item:hover {
+            background: #f0f0f0;
+        }
+
+        .tab-item.active {
             background: #000;
             color: #fff;
-            border-radius: 50px;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-decoration: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            z-index: 1000;
         }
 
-        .back-btn:hover {
-            transform: translateX(-5px);
-            background: #333;
-        }
-
-        .progress-timeline {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+        .timeline-view {
             width: 100%;
-            max-width: 1100px;
-            margin: 2rem 0 4rem;
-            position: relative;
-        }
-
-        .progress-line {
-            position: absolute;
-            top: 12px;
-            left: 12.5%;
-            right: 12.5%;
-            height: 4px;
-            background: #e5e7eb;
-            z-index: 1;
-        }
-
-        .progress-line-fill {
-            position: absolute;
-            top: 12px;
-            left: 12.5%;
-            height: 4px;
-            background: #000;
-            z-index: 1;
-            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            width: 0%;
-        }
-
-        .timeline-step {
+            max-width: 1200px;
+            min-height: 100vh;
+            margin: 0 auto;
+            padding: 8rem 2rem 5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            flex: 1;
-            position: relative;
-            z-index: 2;
-            cursor: pointer;
         }
 
-        .step-marker {
-            width: 28px;
-            height: 28px;
-            background: #fff;
-            border: 4px solid #e5e7eb;
-            border-radius: 50%;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            margin-bottom: 1.5rem;
-        }
-
-        .timeline-step.active .step-marker {
-            border-color: #000;
-            background: #000;
-            transform: scale(1.2);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .step-label {
-            font-size: 0.85rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: #999;
-            transition: color 0.4s ease;
-            text-align: center;
-            max-width: 140px;
-            line-height: 1.4;
-            letter-spacing: 0.05em;
-        }
-
-        .timeline-step.active .step-label {
-            color: #111;
+        .details-container {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
         .detail-card {
             width: 100%;
-            max-width: 800px;
             background: #fff;
             border-radius: 24px;
             padding: 3rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
-            border: 1px solid #f0f0f0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
+            border: 2px solid #000;
+            animation: cardSlideUp 0.6s ease forwards;
             position: relative;
         }
 
-        .detail-card.show {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes cardSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-step-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: #000;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .detail-header {
+            text-align: left;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1.5rem;
+        }
+
+        .detail-header h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            color: #111;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            width: 100%;
+        }
+
+        .detail-col h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            color: #111;
+        }
+
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .bullet-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #000;
+            font-size: 1.2rem;
+        }
+
+        .personal-insight-box {
+            background: #f8f9fa;
+            border-left: 5px solid #000;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .insight-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .insight-header h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 0;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 3rem;
+        }
+
+        .btn-roadmap {
+            background: #000;
+            color: #fff;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-roadmap:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
         .filter-box {
@@ -169,21 +237,16 @@
             padding: 1.5rem 2rem;
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
             margin-bottom: 2rem;
             width: 100%;
             max-width: 600px;
-            border: 1px solid #f0f0f0;
-            z-index: 10;
+            border: 2px solid #000;
         }
 
         .select-group {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            width: 100%;
         }
 
         .select-group label {
@@ -191,131 +254,111 @@
             font-weight: 700;
             color: #888;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         .select-group select {
-            padding: 0.8rem 1rem;
+            padding: 0.8rem;
             border-radius: 12px;
-            border: 1px solid #e0e0e0;
+            border: 2px solid #000;
             font-size: 1rem;
-            color: #111;
             font-weight: 600;
-            outline: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
             background: #fff;
         }
 
-        .select-group select:hover {
-            border-color: #000;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            .progress-timeline {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 2rem;
-                padding-left: 2rem;
-            }
-
-            .progress-line,
-            .progress-line-fill {
-                left: 32px;
-                width: 4px !important;
-                top: 0;
-                bottom: 0;
-                height: auto;
-            }
-
-            .timeline-step {
-                flex-direction: row;
-                gap: 1.5rem;
-                align-items: center;
-            }
-
-            .step-marker {
-                margin-bottom: 0;
-            }
-
-            .step-label {
-                text-align: left;
-                max-width: none;
+        @media (max-width: 992px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 
 <body>
+    <header class="main-header" style="position: absolute; top: 1.5rem; left: 2rem; z-index: 100;">
+        <a href="index.html">
+            <img src="KAREER.png" alt="Kareer Logo" style="height: 40px;">
+        </a>
+    </header>
+
     <div class="tab-container">
-        <a href="step3.html" class="tab-item">Mở lối sự nghiệp</a>
+        <a href="step2.html" class="tab-item">Kết quả phân tích</a>
+        <a href="step3.html" class="tab-item">Định hướng</a>
         <a href="#" class="tab-item active">Chi tiết nghề nghiệp</a>
         <a href="roadmap.html" class="tab-item">Lộ trình phát triển</a>
     </div>
 
     <div class="timeline-view">
-        <a href="step3.html" class="back-btn"><span>← Quay lại</span></a>
-
-
+        <header class="timeline-header">
+            <h1 id="timeline-title">Chi tiết Nghề nghiệp</h1>
+            <p id="timeline-subtitle">Phân tích chuyên sâu về vị trí cao nhất bạn có thể đạt được.</p>
+        </header>
 
         <div class="filter-box">
             <div class="select-group">
-                <label>Vị trí công việc mục tiêu</label>
-                <select id="role-filter">
-                    <!-- Options populated by JS -->
-                </select>
+                <label>Công việc mục tiêu</label>
+                <select id="role-filter"></select>
             </div>
         </div>
 
-        <div class="progress-timeline" id="timeline">
-            <div class="progress-line"></div>
-            <div class="progress-line-fill" id="progress-fill"></div>
-
-            <div class="timeline-step active" onclick="showStep(0)">
-                <div class="step-marker"></div>
-                <div class="step-label">Học viên / Thực tập</div>
-            </div>
-            <div class="timeline-step" onclick="showStep(1)">
-                <div class="step-marker"></div>
-                <div class="step-label">Chuyên viên sơ cấp</div>
-            </div>
-            <div class="timeline-step" onclick="showStep(2)">
-                <div class="step-marker"></div>
-                <div class="step-label">Chuyên viên chính</div>
-            </div>
-            <div class="timeline-step" onclick="showStep(3)">
-                <div class="step-marker"></div>
-                <div class="step-label">Quản lý / Chuyên gia</div>
-            </div>
-        </div>
-
-        <div class="detail-card" id="detail-card">
-            <div id="detail-content"></div>
-        </div>
+        <div class="details-container" id="details-container"></div>
     </div>
 
     <script>
         const careerList = [
-            "Kỹ sư phần mềm", "Chuyên viên Phân tích dữ liệu", "Nhà thiết kế UX/UI", 
-            "Quản lý Dự án IT", "Chuyên viên Marketing số", "Kế toán trưởng", 
-            "Chuyên viên Nhân sự", "Kiến trúc sư", "Bác sĩ Đa khoa", 
-            "Chuyên viên Tư vấn Tài chính", "Nhà tâm lý học", "Kỹ sư Cơ khí", 
-            "Kiểm toán viên", "Chuyên viên PR & Truyền thông", "Lập trình viên AI/ML", 
-            "Quản lý Chuỗi cung ứng", "Nhà thiết kế thời trang", "Giáo viên Tiếng Anh", 
-            "Chuyên viên Luật", "Doanh nhân / Founder", "Quản lý Khách sạn", 
-            "Nhà khoa học dữ liệu"
+            "Giám đốc Công nghệ (CTO) / Kiến trúc sư trưởng",
+            "Trưởng phòng Phân tích dữ liệu chiến lược",
+            "Giám đốc Trải nghiệm (CXO) / Giám đốc Nghệ thuật",
+            "Giám đốc Quản lý Dự án & Vận hành IT",
+            "Giám đốc Marketing số",
+            "Giám đốc Tài chính (CFO)",
+            "Giám đốc Nhân sự (CHRO)",
+            "Kiến trúc sư trưởng / Chủ trì thiết kế cấp cao",
+            "Giám đốc Y khoa / Chuyên gia Tư vấn Cấp cao",
+            "Đối tác Quản lý Tài sản Cấp cao (Wealth Manager)",
+            "Chuyên gia Tư vấn Chiến lược Sức khỏe Tinh thần",
+            "Trưởng phòng Kỹ thuật / Chuyên gia Tư vấn Công nghiệp",
+            "Giám đốc Kiểm toán / Đối tác (Partner)",
+            "Giám đốc Truyền thông & Thương hiệu",
+            "Chuyên gia Nghiên cứu AI / Giám đốc Khoa học",
+            "Giám đốc Chuỗi cung ứng (CSO)",
+            "Giám đốc Sáng tạo / Chủ sở hữu thương hiệu thời trang",
+            "Chuyên gia Ngôn ngữ / Giám đốc Học thuật",
+            "Giám đốc Pháp chế / Luật sư điều hành",
+            "Chủ tịch Hội đồng Quản trị / Tổng Giám đốc (CEO)",
+            "Giám đốc Điều hành Khách sạn / Khu nghỉ dưỡng",
+            "Trưởng khoa học dữ liệu (Chief Data Scientist)"
         ];
 
         const roleCategories = {
-            tech: ["Kỹ sư phần mềm", "Lập trình viên AI/ML", "Nhà khoa học dữ liệu", "Kỹ sư Cơ khí", "Quản lý Dự án IT", "Chuyên viên Phân tích dữ liệu"],
-            creative: ["Nhà thiết kế UX/UI", "Nhà thiết kế thời trang", "Kiến trúc sư", "Chuyên viên PR & Truyền thông"],
-            business: ["Chuyên viên Marketing số", "Kế toán trưởng", "Kiểm toán viên", "Quản lý Chuỗi cung ứng", "Chuyên viên Tư vấn Tài chính", "Quản lý Khách sạn", "Doanh nhân / Founder"],
-            social: ["Chuyên viên Nhân sự", "Bác sĩ Đa khoa", "Nhà tâm lý học", "Giáo viên Tiếng Anh", "Chuyên viên Luật"]
+            tech: [
+                "Giám đốc Công nghệ (CTO) / Kiến trúc sư trưởng",
+                "Trưởng phòng Phân tích dữ liệu chiến lược",
+                "Giám đốc Quản lý Dự án & Vận hành IT",
+                "Chuyên gia Nghiên cứu AI / Giám đốc Khoa học",
+                "Trưởng khoa học dữ liệu (Chief Data Scientist)"
+            ],
+            creative: [
+                "Giám đốc Trải nghiệm (CXO) / Giám đốc Nghệ thuật",
+                "Kiến trúc sư trưởng / Chủ trì thiết kế cấp cao",
+                "Giám đốc Sáng tạo / Chủ sở hữu thương hiệu thời trang"
+            ],
+            business: [
+                "Giám đốc Marketing số",
+                "Giám đốc Tài chính (CFO)",
+                "Đối tác Quản lý Tài sản Cấp cao (Wealth Manager)",
+                "Giám đốc Kiểm toán / Đối tác (Partner)",
+                "Giám đốc Truyền thông & Thương hiệu",
+                "Giám đốc Chuỗi cung ứng (CSO)",
+                "Chủ tịch Hội đồng Quản trị / Tổng Giám đốc (CEO)",
+                "Giám đốc Điều hành Khách sạn / Khu nghỉ dưỡng"
+            ],
+            social: [
+                "Giám đốc Nhân sự (CHRO)",
+                "Giám đốc Y khoa / Chuyên gia Tư vấn Cấp cao",
+                "Chuyên gia Tư vấn Chiến lược Sức khỏe Tinh thần",
+                "Chuyên gia Ngôn ngữ / Giám đốc Học thuật",
+                "Giám đốc Pháp chế / Luật sư điều hành"
+            ]
         };
 
         const categorySkills = {
@@ -325,225 +368,103 @@
             social: ["Kỹ năng tham vấn", "Giao tiếp liên nhân", "Quản trị nhân sự", "Pháp luật & Đạo đức", "Thấu cảm & Hỗ trợ"]
         };
 
-        function generateCustomTimeline(targetRole, profile) {
-            const basePos = profile.position || "Người mới bắt đầu";
+        function generateCustomTimeline(targetRole) {
             const category = Object.keys(roleCategories).find(key => roleCategories[key].includes(targetRole)) || 'business';
-            const skills = categorySkills[category];
-
-            return [
-                {
-                    title: `Thử việc (${basePos} Transition)`, time: "0 - 6 tháng",
-                    desc: `Tận dụng nền tảng <strong>${basePos}</strong> để làm quen với quy trình mới và thiết lập các mối quan hệ chuyên môn ban đầu.`,
-                    tasks: ["Tìm hiểu quy trình nội bộ", "Làm chủ bộ công cụ làm việc", "Hỗ trợ các dự án đang triển khai", "Thiết lập mục tiêu cá nhân"]
-                },
-                {
-                    title: `Nhân viên ${targetRole}`, time: "6 tháng - 2 năm",
-                    desc: `Trở thành thành viên nòng cốt, độc lập xử lý các tác vụ chuyên môn về <strong>${skills[0]}</strong> và <strong>${skills[1]}</strong>.`,
-                    tasks: [`Xử lý ${skills[0]} độc lập`, "Nâng cao hiệu suất làm việc", "Phối hợp liên phòng ban", "Đề xuất sáng kiến cải tiến"]
-                },
-                {
-                    title: `Chuyên viên ${targetRole} cấp cao`, time: "2 - 5 năm",
-                    desc: `Dẫn dắt các mảng công việc phức tạp, mentor cho thế hệ mới và làm chủ <strong>${skills[2]}</strong> cùng <strong>${skills[3]}</strong>.`,
-                    tasks: [`Quản lý ${skills[2]} chiến lược`, "Giải quyết các vấn đề kỹ thuật khó", "Đào tạo và hướng dẫn Junior", "Tối ưu quy trình vận hành"]
-                },
-                {
-                    title: `Lãnh đạo / Chuyên gia ${targetRole}`, time: "5 năm +",
-                    desc: `Định hình tầm nhìn phát triển lâu dài, chịu trách nhiệm về <strong>${skills[4]}</strong> và chiến lược tăng trưởng bền vững.`,
-                    tasks: ["Hoạch định chiến lược dài hạn", "Quản trị rủi ro & Nguồn lực", "Xây dựng văn hóa chuyên môn", "Đạt các KPI chiến lược"]
-                }
-            ];
-        }
-
-        const timelineDataByRole = {
-            'Nhà thiết kế UX/UI': [
-                {
-                    title: "Thực tập sinh (Intern)", time: "0 - 6 tháng",
-                    desc: "Giai đoạn này bạn tập trung vào việc học hỏi quy trình, làm quen với công cụ và hỗ trợ các dự án nhỏ dưới sự hướng dẫn của mentor.",
-                    tasks: ["Nắm vững Figma", "Học quy trình Design Thinking", "Làm quen với Agile/Scrum", "Hỗ trợ UI Audit"]
-                },
-                {
-                    title: "Junior Designer", time: "6 tháng - 2 năm",
-                    desc: "Bạn bắt đầu đảm nhận các tính năng độc lập, thực hiện nghiên cứu người dùng cơ bản và cộng tác trực tiếp với đội ngũ kỹ thuật.",
-                    tasks: ["Thiết kế User Flow", "Tạo Wireframe độ phân giải cao", "Thực hiện Usability Testing", "Xây dựng Component Library"]
-                },
-                {
-                    title: "Middle Designer", time: "2 - 5 năm",
-                    desc: "Giai đoạn này bạn cần có tư duy sản phẩm sâu sắc hơn, có khả năng giải quyết các bài toán UX phức tạp và định hướng cho Junior.",
-                    tasks: ["Xây dựng Design System", "Phân tích dữ liệu người dùng", "Tối ưu hóa trải nghiệm chuyển đổi", "Phản biện và bảo vệ thiết kế"]
-                },
-                {
-                    title: "Senior / Lead Designer", time: "5 năm +",
-                    desc: "Bạn đóng vai trò chiến lược, định hướng tầm nhìn sản phẩm và dẫn dắt đội ngũ thiết kế đạt được các mục tiêu kinh doanh.",
-                    tasks: ["Định hướng trải nghiệm thương hiệu", "Quản lý nguồn lực thiết kế", "Xây dựng chiến lược sản phẩm", "Đào tạo và phát triển đội ngũ"]
-                }
-            ],
-            'Giáo viên Tiếng Anh': [
-                {
-                    title: "Trợ giảng / Giáo viên tập sự", time: "0 - 1 năm",
-                    desc: "Học hỏi phương pháp quản lý lớp học, hỗ trợ soạn giáo án và làm quen với các bộ giáo trình chuẩn quốc tế.",
-                    tasks: ["Quản lý nề nếp lớp học", "Hỗ trợ chấm bài & chỉnh phát âm", "Soạn bài giảng bổ trợ", "Tham gia các buổi training sư phạm"]
-                },
-                {
-                    title: "Giáo viên chính thức", time: "1 - 3 năm",
-                    desc: "Đứng lớp độc lập, chịu trách nhiệm về chất lượng đầu ra của học viên và nâng cao kỹ năng sư phạm chuyên sâu.",
-                    tasks: ["Giảng dạy các lớp mục tiêu", "Luyện thi IELTS/TOEIC/SAT", "Xây dựng giáo trình cá nhân hóa", "Tư vấn lộ trình học tập"]
-                },
-                {
-                    title: "Tổ trưởng bộ môn", time: "3 - 7 năm",
-                    desc: "Quản lý chất lượng giảng dạy của tổ, đào tạo giáo viên mới và phát triển các sản phẩm giáo dục mới.",
-                    tasks: ["Dự giờ & góp ý chuyên môn", "Thiết kế khung chương trình học", "Quản lý đội ngũ giáo viên", "Tổ chức hội thảo chuyên đề"]
-                },
-                {
-                    title: "Giám đốc đào tạo / Hiệu trưởng", time: "7 năm +",
-                    desc: "Định hướng chiến lược phát triển học thuật, quản trị vận hành trung tâm/trường học và xây dựng thương hiệu giáo dục.",
-                    tasks: ["Xây dựng chiến lược đào tạo", "Quản trị vận hành & tài chính", "Thiết lập quan hệ đối tác", "Phát triển tầm nhìn sư phạm"]
-                }
-            ],
-            'Kỹ sư phần mềm': [
-                {
-                    title: "Intern / Junior Developer", time: "0 - 2 năm",
-                    desc: "Làm quen với codebase, học quy trình làm việc Agile/Scrum và hoàn thành các task nhỏ dưới sự hướng dẫn của Senior.",
-                    tasks: ["Viết code sạch & UnitTest", "Fix bug & maintenance", "Tìm hiểu kiến trúc hệ thống", "Học hỏi từ code review"]
-                },
-                {
-                    title: "Middle Software Engineer", time: "2 - 5 năm",
-                    desc: "Đảm nhận các tính năng phức tạp, tự chủ trong việc thiết kế module và bắt đầu hỗ trợ các thành viên mới.",
-                    tasks: ["Thiết kế logic module", "Tối ưu hiệu suất code", "Viết tài liệu kỹ thuật", "Mentor cho Intern/Junior"]
-                },
-                {
-                    title: "Senior / Tech Lead", time: "5 - 8 năm",
-                    desc: "Quyết định kiến trúc hệ thống, giải quyết các vấn đề kỹ thuật khó và dẫn dắt đội ngũ kỹ thuật về mặt chuyên môn.",
-                    tasks: ["Thiết kế kiến trúc hệ thống", "Review kiến trúc & bảo mật", "Giải quyết tech debt", "Quản lý tiến độ kỹ thuật"]
-                },
-                {
-                    title: "Software Architect / CTO", time: "8 năm +",
-                    desc: "Định hướng công nghệ cho toàn công ty, đưa ra các quyết định chiến lược về hạ tầng và xây dựng văn hóa kỹ thuật.",
-                    tasks: ["Xây dựng chiến lược công nghệ", "Quản lý ngân sách IT", "Tuyển dụng & giữ chân nhân tài", "Tối ưu hóa quy trình R&D"]
-                }
-            ],
-            'default': [
-                {
-                    title: "Thực tập / Thử việc", time: "0 - 6 tháng",
-                    desc: "Tiếp cận môi trường chuyên nghiệp, học hỏi nền tảng cơ bản và hoàn thiện các kỹ năng thiết yếu trong ngành.",
-                    tasks: ["Tìm hiểu quy trình", "Làm chủ công cụ làm việc", "Hỗ trợ dự án", "Báo cáo cập nhật công việc"]
-                },
-                {
-                    title: "Nhân viên thực hiện", time: "6 tháng - 2 năm",
-                    desc: "Độc lập giải quyết các công việc chuyên môn, đóng góp vào mục tiêu chung và xây dựng tư duy phản biện.",
-                    tasks: ["Xử lý tác vụ độc lập", "Phối hợp làm việc nhóm", "Tối ưu hoá hiệu suất", "Đóng góp sáng kiến cải tiến"]
-                },
-                {
-                    title: "Chuyên viên nòng cốt", time: "2 - 5 năm",
-                    desc: "Nắm vững chuyên môn sâu, dẫn dắt các dự án quan trọng và đóng vai trò cầu nối trong đội ngũ.",
-                    tasks: ["Quản lý dự án chuyên môn", "Giải quyết vấn đề phức tạp", "Mentor thành viên mới", "Phân tích dữ liệu hiệu quả"]
-                },
-                {
-                    title: "Lãnh đạo / Chuyên gia cấp cao", time: "5 năm +",
-                    desc: "Định hình tầm nhìn, quản trị rủi ro và chịu trách nhiệm tối thượng về thành quả chiến lược.",
-                    tasks: ["Hoạch định chiến lược", "Quản trị nguồn lực", "Xây dựng văn hóa", "Đạt mục tiêu tổ chức"]
-                }
-            ]
-        };
-
-        let currentActiveStep = 0;
-
-        function initDropdown() {
-            const roleFilter = document.getElementById('role-filter');
-            roleFilter.innerHTML = careerList.map(c => `<option value="${c}">${c}</option>`).join('');
             
-            const selectedCareer = localStorage.getItem('selectedCareer');
-            if (selectedCareer && careerList.includes(selectedCareer)) {
-                roleFilter.value = selectedCareer;
-            }
-
-            roleFilter.addEventListener('change', () => {
-                localStorage.setItem('selectedCareer', roleFilter.value);
-                updateStepLabels();
-                showStep(currentActiveStep);
-            });
-        }
-
-        function updateStepLabels() {
-            const role = document.getElementById('role-filter').value;
-            const profile = JSON.parse(localStorage.getItem('kareer_profile') || '{}');
-            const dataList = generateCustomTimeline(role, profile);
-            const labels = document.querySelectorAll('.step-label');
-            labels.forEach((label, i) => {
-                if (dataList[i]) {
-                    label.textContent = dataList[i].title;
+            const specializedData = {
+                'Giám đốc Trải nghiệm (CXO) / Giám đốc Nghệ thuật': {
+                    title: "Giám đốc Trải nghiệm (CXO) / Giám đốc Nghệ thuật",
+                    desc: "Tham gia vào ban điều hành để định hướng tương lai sản phẩm. Chịu trách nhiệm về sự thành công lâu dài của trải nghiệm khách hàng và giá trị thương hiệu toàn cầu.",
+                    requirements: ["Kinh nghiệm quản lý cấp C-level", "Uy tín cao trong cộng đồng thiết kế quốc tế", "Tư duy quản trị doanh nghiệp vĩ mô"],
+                    skills: ["Corporate Strategy", "Innovation Leadership", "Global Branding"],
+                    tasks: ["Hoạch định chiến lược trải nghiệm khách hàng", "Xây dựng mạng lưới đối tác chiến lược", "Cố vấn cho HĐQT về đổi mới sáng tạo", "Định hình tiêu chuẩn trải nghiệm của ngành"]
+                },
+                'Giám đốc Công nghệ (CTO) / Kiến trúc sư trưởng': {
+                    title: "Giám đốc Công nghệ (CTO) / Kiến trúc sư trưởng",
+                    desc: "Xây dựng chiến lược công nghệ dài hạn cho doanh nghiệp. Định hướng hạ tầng, bảo mật và văn hóa kỹ thuật cấp tập đoàn.",
+                    requirements: ["Kinh nghiệm quản lý kỹ thuật cấp cao", "Tầm nhìn chiến lược công nghệ toàn cầu", "Khả năng hoạch định ngân sách IT"],
+                    skills: ["Technology Strategy", "Engineering Leadership", "Cybersecurity Governance"],
+                    tasks: ["Xây dựng Tech Roadmap 5-10 năm", "Quản trị nguồn lực và tài năng IT", "Cố vấn cho HĐQT về xu hướng tech", "Định hình tiêu chuẩn kỹ thuật bền vững"]
+                },
+                'Giám đốc Tài chính (CFO)': {
+                    title: "Giám đốc Tài chính (CFO)",
+                    desc: "Quản trị tối cao nguồn lực tài chính của doanh nghiệp. Tham mưu chiến lược đầu tư, quản trị rủi ro và đảm bảo sự bền vững tài chính toàn tổ chức.",
+                    requirements: ["Chứng chỉ quốc tế (CPA/CFA)", "Kinh nghiệm quản lý tài chính tập đoàn", "Tư duy chiến lược kinh doanh"],
+                    skills: ["Financial Strategy", "Investment Analysis", "Risk Management"],
+                    tasks: ["Hoạch định cấu trúc tài chính doanh nghiệp", "Xây dựng chiến lược vốn và đầu tư", "Quản trị quan hệ với nhà đầu tư", "Giám sát tuân thủ và kiểm soát nội bộ"]
                 }
-            });
+            };
+
+            const data = specializedData[targetRole] || {
+                title: targetRole,
+                desc: `Vị trí lãnh đạo cao nhất trong lĩnh vực chuyên môn. Định hình tầm nhìn dài hạn và chiến lược phát triển bền vững cho tổ chức.`,
+                requirements: ["Kinh nghiệm quản lý cấp cao", "Tầm nhìn chiến lược ngành", "Kỹ năng lãnh đạo và mentor"],
+                skills: categorySkills[category],
+                tasks: ["Hoạch định chiến lược tăng trưởng", "Xây dựng vị thế cạnh tranh", "Thiết lập tiêu chuẩn chuyên môn", "Đại diện tổ chức trong các quan hệ đối tác"]
+            };
+
+            return data;
         }
 
-        function showStep(index) {
-            currentActiveStep = index;
-            const steps = document.querySelectorAll('.timeline-step');
-            const fill = document.getElementById('progress-fill');
-            const card = document.getElementById('detail-card');
-            const content = document.getElementById('detail-content');
+        function render() {
             const role = document.getElementById('role-filter').value;
-
-            const quizResult = JSON.parse(localStorage.getItem('kareer_result') || '{}');
-            const userScores = quizResult.scores || {};
-            const profile = JSON.parse(localStorage.getItem('kareer_profile') || '{}');
+            const data = generateCustomTimeline(role);
+            const riasec = JSON.parse(localStorage.getItem('kareer_riasec') || '{"topTraits":["enterprising","social"]}');
             
-            const topTraits = Object.entries(userScores)
-                .sort(([, a], [, b]) => b - a)
-                .slice(0, 2)
-                .map(([trait]) => trait);
-
+            document.getElementById('timeline-subtitle').innerHTML = `Phân tích chuyên sâu về vị trí cao nhất bạn có thể đạt được: <strong>${role}</strong>`;
+            
             const traitLabels = {
                 realistic: 'Thực tế (R)', investigative: 'Nghiên cứu (I)', artistic: 'Nghệ thuật (A)',
                 social: 'Xã hội (S)', enterprising: 'Quản lý (E)', conventional: 'Nghiệp vụ (C)'
             };
 
-            steps.forEach((s, i) => {
-                if (i <= index) s.classList.add('active');
-                else s.classList.remove('active');
-            });
-
-            const percentage = (index / (steps.length - 1)) * 75;
-            fill.style.width = `${percentage}%`;
-
-            const dataList = generateCustomTimeline(role, profile);
-            const data = dataList[index];
-            
-            card.classList.remove('show');
-
-            // Personalize Insight
-            let personalInsight = "";
-            if (index === 0) {
-                personalInsight = `Dựa trên phân tích, bạn có lợi thế lớn nhờ sự kết hợp giữa <strong>${traitLabels[topTraits[0]]}</strong> và nền tảng <strong>${profile.position || 'của mình'}</strong>. Hãy tập trung khai thác điểm này để gây ấn tượng trong giai đoạn đầu.`;
-            } else {
-                personalInsight = `Với tư duy <strong>${traitLabels[topTraits[0]]}</strong>, bạn sẽ dễ dàng làm chủ các kỹ năng cần thiết ở giai đoạn này nếu biết cách liên kết chúng với các dự án thực tế.`;
-            }
-
-            setTimeout(() => {
-                content.innerHTML = `
+            document.getElementById('details-container').innerHTML = `
+                <div class="detail-card">
+                    <div class="detail-step-tag">MỤC TIÊU CAO NHẤT</div>
                     <div class="detail-header">
-                        <div class="detail-title"><h2>${data.title}</h2></div>
-                        <span class="detail-time">${data.time}</span>
+                        <h2>${data.title}</h2>
                     </div>
-                    <div class="detail-body">
-                        <div style="margin-bottom: 2rem; padding: 1.2rem; background: #f0f7ff; border-radius: 12px; border: 1px solid #cce3ff; font-size: 0.95rem; line-height: 1.6; color: #004a99;">
-                            <strong style="display: block; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;">💡 Phân tích từ Kareer</strong>
-                            ${personalInsight}
-                        </div>
-                        <h3>Mục tiêu giai đoạn</h3>
-                        <p>${data.desc}</p>
-                        <h3>Kỹ năng & Nhiệm vụ cốt lõi</h3>
-                        <div class="task-list">
-                            ${data.tasks.map(t => `<div class="task-item"><span class="task-icon">✔</span> ${t}</div>`).join('')}
-                        </div>
+                    
+                    <div class="detail-grid">
+                        <section class="detail-col">
+                            <h3>Mô tả công việc</h3>
+                            <p>${data.desc}</p>
+                            <h3>Yêu cầu nghề nghiệp</h3>
+                            <ul class="bullet-list">${data.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
+                        </section>
+
+                        <section class="detail-col">
+                            <h3>Công việc chính</h3>
+                            <ul class="bullet-list">${data.tasks.map(t => `<li>${t}</li>`).join('')}</ul>
+                            <h3>Kỹ năng quan trọng</h3>
+                            <ul class="bullet-list">${data.skills.map(s => `<li>${s}</li>`).join('')}</ul>
+                        </section>
                     </div>
-                `;
-                card.classList.add('show');
-            }, 300);
+
+                    <div class="personal-insight-box">
+                        <div class="insight-header">
+                            <span class="insight-icon">✨</span>
+                            <h4>Phân tích từ Kareer AI</h4>
+                        </div>
+                        <p>Tại đích đến <strong>${role}</strong> cấp cao, tố chất <strong>${traitLabels[riasec.topTraits[0]]}</strong> sẽ giúp bạn định hình tầm nhìn chiến lược. Đây là vị trí tối ưu để bạn phát huy tối đa tiềm năng bản thân.</p>
+                    </div>
+
+                    <div class="card-footer">
+                        <a href="roadmap.html" class="btn-roadmap">Xem lộ trình thăng tiến →</a>
+                    </div>
+                </div>
+            `;
         }
 
-        initDropdown();
-        updateStepLabels();
-        showStep(0);
+        const roleFilter = document.getElementById('role-filter');
+        roleFilter.innerHTML = careerList.map(c => `<option value="${c}">${c}</option>`).join('');
+        roleFilter.value = localStorage.getItem('selectedCareer') || careerList[0];
+        roleFilter.onchange = (e) => {
+            localStorage.setItem('selectedCareer', e.target.value);
+            render();
+        };
+
+        window.onload = render;
     </script>
 </body>
 </html>
