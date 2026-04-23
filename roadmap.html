@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kế hoạch học tập | Matrix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+        rel="stylesheet">
+    <!-- Updated: step3.css (was style.css in subfolder) -->
+    <link rel="stylesheet" href="step3.css">
+    <style>
+        body {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+        }
+
+        .roadmap-view {
+            min-height: 100vh;
+            background: #f8f9fa;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .roadmap-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease;
+        }
+
+        .roadmap-header h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #111;
+        }
+
+        .roadmap-header p {
+            font-family: var(--font-main);
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: #fff;
+            color: #111;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-box {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: flex-end;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            min-width: 250px;
+        }
+
+        .select-group label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .select-group select {
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            font-size: 1rem;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .select-group select:focus {
+            border-color: #000;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .course-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0f0f0;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-tag {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            background: #f0f0f0;
+            border-radius: 50px;
+            width: fit-content;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .course-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            color: #111;
+        }
+
+        .course-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .course-meta {
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid #f5f5f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-provider {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .course-link {
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .course-link:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .roadmap-view {
+                padding: 4rem 1rem;
+            }
+
+            .back-btn {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .filter-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="roadmap-view">
+        <!-- Updated: step3.html (was index.html in subfolder) -->
+        <a href="step3.html" class="back-btn"><span>← Quay lại</span></a>
+
+        <div class="roadmap-header">
+            <h1>Lộ trình đào tạo đề xuất</h1>
+            <p>Dựa trên bản sắc nghề nghiệp và các kỹ năng bạn đang sở hữu, đây là lộ trình học tập tối ưu để bạn tiến
+                xa hơn.</p>
+        </div>
+
+        <div class="filter-box">
+            <div class="select-group">
+                <label>Vị trí công việc</label>
+                <select id="role-filter">
+                    <option value="ui-designer">UI Designer</option>
+                    <option value="frontend-dev">Frontend Developer</option>
+                    <option value="product-manager">Product Manager</option>
+                    <option value="data-analyst">Data Analyst</option>
+                </select>
+            </div>
+            <div class="select-group">
+                <label>Giai đoạn mục tiêu</label>
+                <select id="level-filter">
+                    <option value="intern">Intern / Junior</option>
+                    <option value="middle">Middle Level</option>
+                    <option value="senior">Senior / Lead</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="course-grid" id="course-grid"></div>
+    </div>
+
+    <script>
+        const roadmapData = {
+            'ui-designer': {
+                'intern': [
+                    { title: "Design Fundamentals: UI/UX Essentials", provider: "Interaction Design Foundation", desc: "Nắm vững nguyên lý cơ bản về màu sắc, layout và typography trong thiết kế giao diện.", tag: "Nền tảng" },
+                    { title: "Mastering Figma for Beginners", provider: "Udemy", desc: "Sử dụng thành thạo công cụ thiết kế Figma từ các tính năng cơ bản đến nâng cao.", tag: "Công cụ" }
+                ],
+                'middle': [
+                    { title: "Advanced Design Systems", provider: "DesignBetter.co", desc: "Học cách xây dựng và quản lý hệ thống thiết kế (Design System) quy mô lớn.", tag: "Nâng cao" },
+                    { title: "Prototyping with Propi", provider: "Coursera", desc: "Tạo các prototype có độ tương tác cao và mô phỏng trải nghiệm thực tế.", tag: "Chuyên môn" }
+                ],
+                'senior': [
+                    { title: "Strategic Design Leadership", provider: "IDEO U", desc: "Phát triển tư duy chiến lược và kỹ năng dẫn dắt đội ngũ thiết kế sáng tạo.", tag: "Lãnh đạo" }
+                ]
+            }
+        };
+
+        function renderCourses() {
+            const grid = document.getElementById('course-grid');
+            const role = document.getElementById('role-filter').value;
+            const level = document.getElementById('level-filter').value;
+            const courses = roadmapData[role]?.[level] || [];
+            grid.innerHTML = courses.map(c => `
+                <div class="course-card">
+                    <div class="course-tag">${c.tag}</div>
+                    <h3>${c.title}</h3>
+                    <p class="course-desc">${c.desc}</p>
+                    <div class="course-meta">
+                        <span class="course-provider">${c.provider}</span>
+                        <a href="#" class="course-link">Khám phá</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('role-filter').addEventListener('change', renderCourses);
+        document.getElementById('level-filter').addEventListener('change', renderCourses);
+        renderCourses();
+    </script>
+</body>
+
+</html>
